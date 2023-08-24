@@ -1,4 +1,4 @@
-# Lens : Expand Your Horizons
+# Lens: Expand Your Horizons
 
 wow!
 rinen
