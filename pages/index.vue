@@ -3,7 +3,13 @@ div
     h1 LENS
     form(action="search", method="get") 
         input(type="search", name="q", placeholder="Search...")
-        input(type="submit", value="Search")
+        label(for="search")
+            svg(viewBox="0 0 24 24")
+                path(:d="mdiGlasses")
+        input.hide(type="submit", value="Search")
+        label(for="search")
+            svg(viewBox="0 0 24 24")
+                path(:d="mdiSearchWeb")
         div
             input(type="checkbox", name="Japan", value="Japan")
             label(for="Japan") Japan
@@ -123,11 +129,12 @@ div
                     
 </template>
 
-<script>
-export default {
-    
-}
+<script setup lang="ts">
+import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
 </script>
 
 <style lang="scss">
+.submit.btn{
+    display: none;
+}
 </style>
