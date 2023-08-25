@@ -11,49 +11,50 @@ div
             svg(viewBox="0 0 24 24")
                 path(:d="mdiSearchWeb")
         div
-            input(type="checkbox", name="Japan", value="Japan")
+            input(type="checkbox", name="country", value="Japan")
             label(for="Japan") Japan
-            input(type="checkbox", name="China", value="China")
+            input(type="checkbox", name="country", value="China")
             label(for="China") China
-            input(type="checkbox", name="Korea", value="Korea")
+            input(type="checkbox", name="country", value="Korea")
             label(for="Korea") Korea
-            input(type="checkbox", name="Taiwan", value="Taiwan")
+            input(type="checkbox", name="country", value="Taiwan")
             label(for="Taiwan") Taiwan
-            input(type="checkbox", name="Hong Kong", value="Hong Kong")
+            input(type="checkbox", name="country", value="Hong Kong")
             label(for="Hong Kong") Hong Kong
-            input(type="checkbox", name="Thailand", value="Thailand")
+            input(type="checkbox", name="country", value="Thailand")
             label(for="Thailand") Thailand
-            input(type="checkbox", name="Philippines", value="Philippines")
+            input(type="checkbox", name="country", value="Philippines")
             label(for="Philippines") Philippines
-            input(type="checkbox", name="Vietnam", value="Vietnam")
+            input(type="checkbox", name="country", value="Vietnam")
             label(for="Vietnam") Vietnam
-            input(type="checkbox", name="Indonesia", value="Indonesia")
+            input(type="checkbox", name="country", value="Indonesia")
             label(for="Indonesia") Indonesia
-            input(type="checkbox", name="Malaysia", value="Malaysia")
+            input(type="checkbox", name="country", value="Malaysia")
             label(for="Malaysia") Malaysia
-            input(type="checkbox", name="Singapore", value="Singapore")
+            input(type="checkbox", name="country", value="Singapore")
             label(for="Singapore") Singapore
-            input(type="checkbox", name="India", value="India")
+            input(type="checkbox", name="country", value="India")
             label(for="India") India
-            input(type="checkbox", name="United States", value="United States")
+            input(type="checkbox", name="country", value="United States")
             label(for="United States") United States
-            input(type="checkbox", name="United Kingdom", value="United Kingdom")
+            input(type="checkbox", name="country", value="United Kingdom")
             label(for="United Kingdom") United Kingdom
-            input(type="checkbox", name="France", value="France")
+            input(type="checkbox", name="country", value="France")
             label(for="France") France
+
         details
             summary
                 | Advanced Search
             div
                 div
                     h2 Search Language
-                    input(type="checkbox", name="Japanese", value="Japanese")
+                    input(type="checkbox", name="searchLanguage", value="Japanese")
                     label(for="Japanese") Japanese
-                    input(type="checkbox", name="English", value="English")
+                    input(type="checkbox", name="searchLanguage", value="English")
                     label(for="English") English
-                    input(type="checkbox", name="Chinese", value="Chinese")
+                    input(type="checkbox", name="searchLanguage", value="Chinese")
                     label(for="Chinese") Chinese
-                    input(type="checkbox", name="Korean", value="Korean")
+                    input(type="checkbox", name="searchLanguage", value="Korean")
                     label(for="Korean") Korean
                 div
                     h2 Translate To
@@ -64,68 +65,69 @@ div
                         option(value="Korean") Korean
                 div
                     h2 Search Engine
-                    input(type="checkbox", name="Google", value="Google")
+                    input(type="checkbox", name="searchEngine", value="Google")
                     label(for="Google") Google
-                    input(type="checkbox", name="Bing", value="Bing")
+                    input(type="checkbox", name="searchEngine", value="Bing")
                     label(for="Bing") Bing
-                    input(type="checkbox", name="Yahoo", value="Yahoo")
+                    input(type="checkbox", name="searchEngine", value="Yahoo")
                     label(for="Yahoo") Yahoo
-                    input(type="checkbox", name="Baidu", value="Baidu")
+                    input(type="checkbox", name="searchEngine", value="Baidu")
                     label(for="Baidu") Baidu
-                    input(type="checkbox", name="Yandex", value="Yandex")
+                    input(type="checkbox", name="searchEngine", value="Yandex")
                     label(for="Yandex") Yandex
-                    input(type="checkbox", name="DuckDuckGo", value="DuckDuckGo")
+                    input(type="checkbox", name="searchEngine", value="DuckDuckGo")
                     label(for="DuckDuckGo") DuckDuckGo
-                    input(type="checkbox", name="Ask", value="Ask")
+                    input(type="checkbox", name="searchEngine", value="Ask")
                     label(for="Ask") Ask
-                    input(type="checkbox", name="AOL", value="AOL")
+                    input(type="checkbox", name="searchEngine", value="AOL")
                     label(for="AOL") AOL
-                    input(type="checkbox", name="Excite", value="Excite")
+                    input(type="checkbox", name="searchEngine", value="Excite")
                     label(for="Excite") Excite
-                    input(type="checkbox", name="Lycos", value="Lycos")
+                    input(type="checkbox", name="searchEngine", value="Lycos")
                     label(for="Lycos") Lycos
-                    input(type="checkbox", name="WebCrawler", value="WebCrawler")
+                    input(type="checkbox", name="searchEngine", value="WebCrawler")
                     label(for="WebCrawler") WebCrawler
-                    input(type="checkbox", name="InfoSeek", value="InfoSeek")
+                    input(type="checkbox", name="searchEngine", value="InfoSeek")
                     label(for="InfoSeek") InfoSeek
-                    input(type="checkbox", name="AltaVista", value="AltaVista")
+                    input(type="checkbox", name="searchEngine", value="AltaVista")
                     label(for="AltaVista") AltaVista
-                    input(type="checkbox", name="HotBot", value="HotBot")
+                    input(type="checkbox", name="searchEngine", value="HotBot")
                     label(for="HotBot") HotBot
-                    input(type="checkbox", name="AllTheWeb", value="AllTheWeb")
+                    input(type="checkbox", name="searchEngine", value="AllTheWeb")
                     label(for="AllTheWeb") AllTheWeb
-                    input(type="checkbox", name="Galaxy", value="Galaxy")
+                    input(type="checkbox", name="searchEngine", value="Galaxy")
                     label(for="Galaxy") Galaxy
-                    input(type="checkbox", name="WOW", value="WOW")
+                    input(type="checkbox", name="searchEngine", value="WOW")
                     label(for="WOW") WOW
-                    input(type="checkbox", name="Teoma", value="Teoma")
+                    input(type="checkbox", name="searchEngine", value="Teoma")
                     label(for="Teoma") Teoma
-                    input(type="checkbox", name="Gigablast", value="Gigablast")
+                    input(type="checkbox", name="searchEngine", value="Gigablast")
                     label(for="Gigablast") Gigablast
-                    input(type="checkbox", name="LookSmart", value="LookSmart")
+                    input(type="checkbox", name="searchEngine", value="LookSmart")
                     label(for="LookSmart") LookSmart
-                    input(type="checkbox", name="Wisenut", value="Wisenut")
+                    input(type="checkbox", name="searchEngine", value="Wisenut")
                     label(for="Wisenut") Wisenut
-                    input(type="checkbox", name="Search", value="Search")
+                    input(type="checkbox", name="searchEngine", value="Search")
                     label(for="Search") Search
-                    input(type="checkbox", name="Dogpile", value="Dogpile")
+                    input(type="checkbox", name="searchEngine", value="Dogpile")
                     label(for="Dogpile") Dogpile
-                    input(type="checkbox", name="Mamma", value="Mamma")
+                    input(type="checkbox", name="searchEngine", value="Mamma")
                     label(for="Mamma") Mamma
-                    input(type="checkbox", name="HotSheet", value="HotSheet")
+                    input(type="checkbox", name="searchEngine", value="HotSheet")
                     label(for="HotSheet") HotSheet
-                    input(type="checkbox", name="MetaCrawler", value="MetaCrawler")
+                    input(type="checkbox", name="searchEngine", value="MetaCrawler")
                     label(for="MetaCrawler") MetaCrawler
-                    input(type="checkbox", name="IxQuick", value="IxQuick")
+                    input(type="checkbox", name="searchEngine", value="IxQuick")
                     label(for="IxQuick") IxQuick
-                    input(type="checkbox", name="ExciteUK", value="ExciteUK")
+                    input(type="checkbox", name="searchEngine", value="ExciteUK")
                     label(for="ExciteUK") ExciteUK
-                    input(type="checkbox", name="InfoSpace", value="InfoSpace")
+                    input(type="checkbox", name="searchEngine", value="InfoSpace")
                     label(for="InfoSpace") InfoSpace
-                    input(type="checkbox", name="Netscape", value="Netscape")
+                    input(type="checkbox", name="searchEngine", value="Netscape")
                     label(for="Netscape") Netscape
-                    input(type="checkbox", name="AltaVistaUK", value="AltaVistaUK")
+                    input(type="checkbox", name="searchEngine", value="AltaVistaUK")
                     label(for="AltaVistaUK") AltaVistaUK
+
                     
 </template>
 
