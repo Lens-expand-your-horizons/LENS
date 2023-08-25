@@ -5,8 +5,8 @@ div
             svg(viewBox="0 0 24 24")
                 path(:d="mdiGlasses")
             h1 LENS
-        input(type="search", name="q", placeholder="Search...")
-        input.hide(type="submit", value="Search")
+        input(type="search", name="q", placeholder="Search...", :value="$route.query.q")
+        input.hide(type="submit", name="search" value="Search")
         label(for="search")
             svg(viewBox="0 0 24 24")
                 path(:d="mdiSearchWeb")

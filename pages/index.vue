@@ -6,7 +6,7 @@ div
         label(for="search")
             svg(viewBox="0 0 24 24")
                 path(:d="mdiGlasses")
-        input.hide(type="submit", value="Search")
+        input.hide(type="submit", name="search" value="Search")
         label(for="search")
             svg(viewBox="0 0 24 24")
                 path(:d="mdiSearchWeb")
