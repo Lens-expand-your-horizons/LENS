@@ -11,52 +11,48 @@ div
             svg(viewBox="0 0 24 24")
                 path(:d="mdiSearchWeb")
     .result
-        .column
-            h2 {{c1.searchEngine}}
+        .column(v-for="c in columns" :key="c.searchEngine")
+            h2 {{c.searchEngine}}
             div
-                div(v-for="row in c1.result" :key="row.id")
-                    h3 {{ row.name }}
-                    div {{ row.detail }}
-        .column
-            h2 {{c2.searchEngine}}
-            div
-                div(v-for="row in c2.result" :key="row.id")
+                div(v-for="row in c.result" :key="row.id")
                     h3 {{ row.name }}
                     div {{ row.detail }}
 </template>
 
 <script setup lang="ts">
 import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
-const c1 = {
-    searchEngine: 'Google',
-    result: [
-        {
-            id: 1,
-            name: 'result1',
-            detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-        },
-        {
-            id: 2,
-            name: 'result2',
-            detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-        },
-    ]
-};
-const c2 = {
-    searchEngine: 'Bing',
-    result: [
-        {
-            id: 1,
-            name: 'result1',
-            detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-        },
-        {
-            id: 2,
-            name: 'result2',
-            detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-        },
-    ]
-};
+const columns = [
+    {
+        searchEngine: 'Google',
+        result: [
+            {
+                id: 1,
+                name: 'result1',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+            },
+            {
+                id: 2,
+                name: 'result2',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+            },
+        ]
+    },
+    {
+        searchEngine: 'Bing',
+        result: [
+            {
+                id: 1,
+                name: 'result1',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+            },
+            {
+                id: 2,
+                name: 'result2',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+            },
+        ]
+    }
+]
 </script>
 
 <style lang="scss">
