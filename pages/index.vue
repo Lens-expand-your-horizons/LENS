@@ -42,6 +42,14 @@ div
 <script setup lang="ts">
 import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
 
+useSeoMeta({
+    title: 'LENS: expand your horizons',
+    description: 'Meta search engine that allows you to search the web in different languages and different countries.',
+    ogTitle: 'LENS: expand your horizons',
+    ogDescription: 'Meta search engine that allows you to search the web in different languages and different countries.',
+    ogUrl: 'https://lens-s.com',
+});
+
 const options = {
     country: [
         'Japan',
