@@ -6,9 +6,9 @@ on:
       - "main"
 
 env:
-  AWS_REGION: 'ap-northeast-1'
-  AWS_S3_BUCKET: 'lens-s.com'
-  SOURCE_DIR: 'dist'
+  AWS_REGION: ap-northeast-1
+  AWS_S3_BUCKET: lens-s.com
+  SOURCE_DIR: dist
 
 permissions:
   id-token: write
