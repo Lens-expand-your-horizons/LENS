@@ -28,7 +28,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v3
       with:
         role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/${{env.AWS_OIDC_NAME}}
-        aws-region: ${{env.MY_AWS_REGION}}
+        aws-region: ${{env.AWS_REGION}}
 
     - name: Build(1) npm
       run: npm ci
