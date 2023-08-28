@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.room 
     h1 LENS
     form(action="search", method="get") 
         input(type="search", name="q", placeholder="Search...")
@@ -120,6 +120,8 @@ div
                     label(for="Netscape") Netscape
                     input(type="checkbox", name="AltaVistaUK", value="AltaVistaUK")
                     label(for="AltaVistaUK") AltaVistaUK
+                    input(type="checkbox", name="ecosia", value="ecosia")
+                    label(for="ecosia") ecosia 
                     
 </template>
 
