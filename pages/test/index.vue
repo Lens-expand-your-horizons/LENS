@@ -1,143 +1,115 @@
 <template lang="pug">
 .root
-    h1 LENS
-    .iroiro 
+    form(action="/search", method="get")
         img(src="lens.svg", alt="lens")
-        img(src=)
-        <div class="example2">
-         <input type="checkbox" checked id="1" name="example2"><label for="1">ボタン</label> 
-         <input type="checkbox" id="2" name="example2"><label for="2">ボタン</label>
-         <input type="checkbox" id="3" name="example2"><label for="3">ボタン</label> </div>
+        .glasses 
+            svg(viewBox="0 0 24 24")
+                path(:d="mdiGlasses")
         .searchbox 
-            form(action="search", method="get")
             input(type="search", style="width: 400px; height: 40px;"
-            name="q", placeholder="  検索/Webサイト名を入力")
-            input(type="submit", value="Search")
-        .country 
-            input(type="checkbox", name="Japan", value="Japan")
-            label(for="Japan") Japan
-            input(type="checkbox", name="China", value="China")
-            label(for="China") China
-            input(type="checkbox", name="Korea", value="Korea")
-            label(for="Korea") Korea
-            input(type="checkbox", name="Taiwan", value="Taiwan")
-            label(for="Taiwan") Taiwan
-            input(type="checkbox", name="Hong Kong", value="Hong Kong")
-            label(for="Hong Kong") Hong Kong
-            input(type="checkbox", name="Thailand", value="Thailand")
-            label(for="Thailand") Thailand
-            input(type="checkbox", name="Philippines", value="Philippines")
-            label(for="Philippines") Philippines
-            input(type="checkbox", name="Vietnam", value="Vietnam")
-            label(for="Vietnam") Vietnam
-            input(type="checkbox", name="Indonesia", value="Indonesia")
-            label(for="Indonesia") Indonesia
-            input(type="checkbox", name="Malaysia", value="Malaysia")
-            label(for="Malaysia") Malaysia
-            input(type="checkbox", name="Singapore", value="Singapore")
-            label(for="Singapore") Singapore
-            input(type="checkbox", name="India", value="India")
-            label(for="India") India
-            input(type="checkbox", name="United States", value="United States")
-            label(for="United States") United States
-            input(type="checkbox", name="United Kingdom", value="United Kingdom")
-            label(for="United Kingdom") United Kingdom
-            input(type="checkbox", name="France", value="France")
-            label(for="France") France
+            name="q", placeholder="  検索/Webサイト名を入力") 
+            input#search(type="submit", name="search", value="Search")
+            label(for="search")
+                <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M27.5712 24.9462H26.1887L25.6987 24.4737C27.4137 22.4787 28.4462 19.8887 28.4462 17.0712C28.4462 10.7887 23.3537 5.69624 17.0712 5.69624C10.7887 5.69624 5.69623 10.7887 5.69623 17.0712C5.69623 23.3537 10.7887 28.4462 17.0712 28.4462C19.8887 28.4462 22.4787 27.4137 24.4737 25.6987L24.9462 26.1887V27.5712L33.6962 36.3037L36.3037 33.6962L27.5712 24.9462ZM17.0712 24.9462C12.7137 24.9462 9.19623 21.4287 9.19623 17.0712C9.19623 12.7137 12.7137 9.19624 17.0712 9.19624C21.4287 9.19624 24.9462 12.7137 24.9462 17.0712C24.9462 21.4287 21.4287 24.9462 17.0712 24.9462Z" fill="black"/>
+                </svg>
+        div
+            .country(v-for="country in options.country" :key="country")
+                input(type="checkbox", name="country", :value="country", :id="country")
+                label(:for="country") {{ country }}
+        
         details
-            summary
-                | Advanced Search
+            summary Advanced Search
             div
                 div
                     h2 Search Language
-                    input(type="checkbox", name="Japanese", value="Japanese")
-                    label(for="Japanese") Japanese
-                    input(type="checkbox", name="English", value="English")
-                    label(for="English") English
-                    input(type="checkbox", name="Chinese", value="Chinese")
-                    label(for="Chinese") Chinese
-                    input(type="checkbox", name="Korean", value="Korean")
-                    label(for="Korean") Korean
+                    .searchLanguage(v-for="searchLanguage in options.searchLanguage" :key="searchLanguage")
+                        input(type="checkbox", name="searchLanguage", :value="searchLanguage")
+                        label(:for="searchLanguage") {{ searchLanguage }}
                 div
                     h2 Translate To
                     select(name="translateTo")
-                        option(value="Japanese") Japanese
-                        option(value="English") English
-                        option(value="Chinese") Chinese
-                        option(value="Korean") Korean
+                        option(
+                            v-for="translateTo in options.translateTo"
+                            :key="translateTo" :value="translateTo"
+                        ) {{ translateTo }}
                 div
                     h2 Search Engine
-                    input(type="checkbox", name="Google", value="Google")
-                    label(for="Google") Google
-                    input(type="checkbox", name="Bing", value="Bing")
-                    label(for="Bing") Bing
-                    input(type="checkbox", name="Yahoo", value="Yahoo")
-                    label(for="Yahoo") Yahoo
-                    input(type="checkbox", name="Baidu", value="Baidu")
-                    label(for="Baidu") Baidu
-                    input(type="checkbox", name="Yandex", value="Yandex")
-                    label(for="Yandex") Yandex
-                    input(type="checkbox", name="DuckDuckGo", value="DuckDuckGo")
-                    label(for="DuckDuckGo") DuckDuckGo
-                    input(type="checkbox", name="Ask", value="Ask")
-                    label(for="Ask") Ask
-                    input(type="checkbox", name="AOL", value="AOL")
-                    label(for="AOL") AOL
-                    input(type="checkbox", name="Excite", value="Excite")
-                    label(for="Excite") Excite
-                    input(type="checkbox", name="Lycos", value="Lycos")
-                    label(for="Lycos") Lycos
-                    input(type="checkbox", name="WebCrawler", value="WebCrawler")
-                    label(for="WebCrawler") WebCrawler
-                    input(type="checkbox", name="InfoSeek", value="InfoSeek")
-                    label(for="InfoSeek") InfoSeek
-                    input(type="checkbox", name="AltaVista", value="AltaVista")
-                    label(for="AltaVista") AltaVista
-                    input(type="checkbox", name="HotBot", value="HotBot")
-                    label(for="HotBot") HotBot
-                    input(type="checkbox", name="AllTheWeb", value="AllTheWeb")
-                    label(for="AllTheWeb") AllTheWeb
-                    input(type="checkbox", name="Galaxy", value="Galaxy")
-                    label(for="Galaxy") Galaxy
-                    input(type="checkbox", name="WOW", value="WOW")
-                    label(for="WOW") WOW
-                    input(type="checkbox", name="Teoma", value="Teoma")
-                    label(for="Teoma") Teoma
-                    input(type="checkbox", name="Gigablast", value="Gigablast")
-                    label(for="Gigablast") Gigablast
-                    input(type="checkbox", name="LookSmart", value="LookSmart")
-                    label(for="LookSmart") LookSmart
-                    input(type="checkbox", name="Wisenut", value="Wisenut")
-                    label(for="Wisenut") Wisenut
-                    input(type="checkbox", name="Search", value="Search")
-                    label(for="Search") Search
-                    input(type="checkbox", name="Dogpile", value="Dogpile")
-                    label(for="Dogpile") Dogpile
-                    input(type="checkbox", name="Mamma", value="Mamma")
-                    label(for="Mamma") Mamma
-                    input(type="checkbox", name="HotSheet", value="HotSheet")
-                    label(for="HotSheet") HotSheet
-                    input(type="checkbox", name="MetaCrawler", value="MetaCrawler")
-                    label(for="MetaCrawler") MetaCrawler
-                    input(type="checkbox", name="IxQuick", value="IxQuick")
-                    label(for="IxQuick") IxQuick
-                    input(type="checkbox", name="ExciteUK", value="ExciteUK")
-                    label(for="ExciteUK") ExciteUK
-                    input(type="checkbox", name="InfoSpace", value="InfoSpace")
-                    label(for="InfoSpace") InfoSpace
-                    input(type="checkbox", name="Netscape", value="Netscape")
-                    label(for="Netscape") Netscape
-                    input(type="checkbox", name="AltaVistaUK", value="AltaVistaUK")
-                    label(for="AltaVistaUK") AltaVistaUK
-                    input(type="checkbox", name="ecosia", value="ecosia")
-                    label(for="ecosia") ecosia 
-
+                    .searchEngine(v-for="searchEngine in options.searchEngine" :key="searchEngine")
+                        input(type="checkbox", name="searchEngine", :value="searchEngine")
+                        label(:for="searchEngine") {{ searchEngine }}
+        
 </template>
 
-<script>
-export default {
-    
-}
+<script setup>
+
+import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
+
+const options = {
+    country: [
+        'Japan',
+        'China',
+        'Korea',
+        'Taiwan',
+        'Hong Kong',
+        'Thailand',
+        'Philippines',
+        'Vietnam',
+        'Indonesia',
+        'Malaysia',
+        'Singapore',
+        'India',
+        'United States',
+        'United Kingdom',
+        'France',
+    ],
+    searchLanguage: [
+        'Japanese',
+        'English',
+        'Chinese',
+        'Korean',
+    ],
+    translateTo: [
+        'Japanese',
+        'English',
+        'Chinese',
+        'Korean',
+    ],
+    searchEngine: [
+        'Google',
+        'Bing',
+        'Yahoo',
+        'Baidu',
+        'Yandex',
+        'DuckDuckGo',
+        'Ask',
+        'AOL',
+        'Excite',
+        'Lycos',
+        'WebCrawler',
+        'InfoSeek',
+        'AltaVista',
+        'HotBot',
+        'AllTheWeb',
+        'Galaxy',
+        'WOW',
+        'Teoma',
+        'Gigablast',
+        'LookSmart',
+        'Wisenut',
+        'Search',
+        'Dogpile',
+        'Mamma',
+        'HotSheet',
+        'MetaCrawler',
+        'IxQuick',
+        'ExciteUK',
+        'InfoSpace',
+        'Netscape',
+        'AltaVistaUK',
+    ],
+};
+
 </script>
 
 <style lang="scss">
@@ -145,26 +117,42 @@ export default {
 .searchbox{ 
     width: 200px;        
     position: relative;  
-    top: 100px;
-    left: 120px;
-}
-
-
-.country {
-  color: rgb(125, 35, 35)  ;
-  font-size: 1.5rem;
+    top: 0px;
+    left: 0px;
 }
 
 body{
     background-color: #e7e7eb;
 }
-.example2{
+
+.country{
     display: flex;
 }
-.example2 label{
+.country label{
     display: block;
-    width: 150px;
+    width: 180px;
     background: #c8eac3;
+    color: #000;
+    padding: 40px;
+    margin: 50px;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.country input:checked+label{
+    background: #1a720d;
+    color: #FFF;
+}
+.country input{
+    display: none;
+}
+
+summary{
+    display: block;
+    width: 100px;
+    background: #987fc0;
     color: #000;
     padding: 10px;
     margin: 10px;
@@ -172,15 +160,11 @@ body{
     text-align: center;
     text-decoration: none;
     border-radius: 30px;
-    cursor: pointer;
-}
-.example2 input:checked+label{
-    background: #1a720d;
-    color: #FFF;
-}
-.example2 input{
-    display: none;
+    cursor: pointer;  
 }
 
+.glasses{
+    width: 200px
+}
 
 </style>
