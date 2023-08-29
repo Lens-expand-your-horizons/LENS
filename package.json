@@ -6,15 +6,27 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@storybook/addon-essentials": "^7.3.2",
+    "@storybook/addon-interactions": "^7.3.2",
+    "@storybook/addon-links": "^7.3.2",
+    "@storybook/blocks": "^7.3.2",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/vue3": "^7.3.2",
+    "@storybook/vue3-vite": "^7.3.2",
     "@types/node": "^18.17.1",
     "@vue/language-plugin-pug": "^1.8.8",
     "nuxt": "^3.6.5",
     "pug": "^3.0.2",
-    "sass": "^1.66.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.66.1",
+    "storybook": "^7.3.2"
   },
   "dependencies": {
     "@mdi/js": "^7.2.96"
