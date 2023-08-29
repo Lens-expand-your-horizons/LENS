@@ -23,15 +23,12 @@ jobs:
 
     - name: Build(2) nuxt
       run: npm run generate
-      
-    - run: pwd
-    - run: tree .
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: SSG-generated
-        path: dist
+        name: dist
+        path: .output/public
         retention-days: 5
   
   deploy:
@@ -57,7 +54,7 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
-        name: SSG-generated
+        name: dist
       
     - name: Copy files to S3
       run: |
