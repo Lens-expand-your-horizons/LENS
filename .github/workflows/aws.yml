@@ -27,7 +27,7 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: dist
+        name: SSG-generated
         path: dist
         retention-days: 5
   
