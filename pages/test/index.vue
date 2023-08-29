@@ -2,7 +2,7 @@
 .root
     h1 LENS
     .iroiro 
-        img(src="lens.svg", alt="lens")
+        img(src="/lens.svg", alt="lens")
         <div class="example2">
          <input type="checkbox" checked id="1" name="example2"><label for="1">ボタン</label> 
          <input type="checkbox" id="2" name="example2"><label for="2">ボタン</label>
