@@ -1,7 +1,7 @@
 <template lang="pug">
 .root
     form(action="/search", method="get")
-        img(src="lens.svg", alt="lens")
+        img(src="/lens.svg", alt="lens")
         .glasses 
             svg(viewBox="0 0 24 24")
                 path(:d="mdiGlasses")
