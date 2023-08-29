@@ -55,10 +55,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dist
-
-    - run: ls -al
       
     - name: Copy files to S3
       run: |
-          aws s3 sync .output/public s3://${{env.AWS_S3_BUCKET}}/
+          aws s3 sync . s3://${{env.AWS_S3_BUCKET}}/
     
