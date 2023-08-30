@@ -20,8 +20,49 @@ export default defineNuxtConfig({
           type: "application/opensearchdescription+xml",
           title: "LENS",
           href: "/osd.xml"
-        }
+        },
       ],
+    },
+  },
+  modules: [
+    '@vite-pwa/nuxt'
+  ],
+  pwa: {
+    registerType: "autoUpdate",
+    includeAssets: ["favicon.ico"],
+    client: {
+      installPrompt: true,
+    },
+    manifest: {
+      name: 'LENS: expand your horizons',
+      description: "meta search engine over multi languages",
+      theme_color: "#ffffff",
+      lang: "ja",
+      short_name: "LENS",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#e7e7eb",
+      icons: [
+        {
+          src: 'pwa.svg',
+          sizes: 'any',
+          type: 'image/svg+xml',
+          purpose: 'any',
+        },
+        {
+          src: 'pwa-465x465.png',
+          sizes: '465x465',
+          type: 'image/png',
+          purpose: 'any',
+        },
+      ],
+    },
+    workbox: {
+      navigateFallback: null
+    },
+    devOptions: {
+      enabled: true,
+      type: "module"
     },
   }
 })
