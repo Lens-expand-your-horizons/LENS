@@ -5,11 +5,37 @@
 		}
 	],
 	"settings": {
-		"files.eol": "\n"
+		"files.eol": "\n",
+		"cSpell.words": [
+			"adipiscing",
+			"amet",
+			"consectetur",
+			"dbaeumer",
+			"dignissim",
+			"eamodio",
+			"elit",
+			"hollowtree",
+			"lectus",
+			"mhutchie",
+			"nuxi",
+			"Nuxt",
+			"OIDC",
+			"opensearchdescription",
+			"Suspendisse",
+			"tortor",
+			"ultricies"
+		]
 	},
 	"extensions": {
 		"recommendations": [
-			"dbaeumer.vscode-eslint"
+			"dbaeumer.vscode-eslint",
+			"figma.figma-vscode-extension",
+			"eamodio.gitlens",
+			"github.vscode-github-actions",
+			"vue.volar",
+			"hollowtree.vue-snippets",
+			"mhutchie.git-graph",
+			"streetsidesoftware.code-spell-checker"
 		]
 	}
 }

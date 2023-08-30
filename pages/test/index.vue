@@ -3,7 +3,7 @@
     form(action="/search", method="get")
         .image 
             .lens 
-                img(src="lens.svg", alt="lens")
+                img(src="/lens.svg", alt="lens")
             .glasses 
                 img(src="glasses.svg", alt="glasses")
         .searchbox 

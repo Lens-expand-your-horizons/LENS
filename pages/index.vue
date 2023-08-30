@@ -1,44 +1,3 @@
-<template lang="pug">
-.room 
-    h1 LENS
-    form(action="search", method="get") 
-        input(type="search", enterkeyhint="search", name="q", placeholder="Search...")
-        label(for="search")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiGlasses")
-        input.hide(type="submit", name="search" value="Search")
-        label(for="search")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiSearchWeb")
-        div
-            .country(v-for="country in options.country" :key="country")
-                input(type="checkbox", name="country", :value="country")
-                label(:for="country") {{ country }}
-
-        details
-            summary Advanced Search
-            div
-                div
-                    h2 Search Language
-                    .searchLanguage(v-for="searchLanguage in options.searchLanguage" :key="searchLanguage")
-                        input(type="checkbox", name="searchLanguage", :value="searchLanguage")
-                        label(:for="searchLanguage") {{ searchLanguage }}
-                div
-                    h2 Translate To
-                    select(name="translateTo")
-                        option(
-                            v-for="translateTo in options.translateTo"
-                            :key="translateTo" :value="translateTo"
-                        ) {{ translateTo }}
-                div
-                    h2 Search Engine
-                    .searchEngine(v-for="searchEngine in options.searchEngine" :key="searchEngine")
-                        input(type="checkbox", name="searchEngine", :value="searchEngine")
-                        label(:for="searchEngine") {{ searchEngine }}
-
-                    
-</template>
-
 <script setup lang="ts">
 import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
 
@@ -114,8 +73,42 @@ const options = {
         'AltaVistaUK',
     ],
 };
-
 </script>
+
+<template lang="pug">
+.room 
+    h1 LENS
+    form(action="search", method="get") 
+        input(type="search", enterkeyhint="search", name="q", placeholder="Search...")
+        label(for="search")
+            svg(viewBox="0 0 24 24")
+                path(:d="mdiGlasses")
+        input.hide(type="submit", name="search" value="Search")
+        label(for="search")
+            svg(viewBox="0 0 24 24")
+                path(:d="mdiSearchWeb")
+        div
+            CheckBoxRow(:array="options.country")
+
+        details
+            summary Advanced Search
+            div
+                div
+                    h2 Search Language
+                    CheckBoxRow(:array="options.searchLanguage")
+                div
+                    h2 Translate To
+                    select(name="translateTo")
+                        option(
+                            v-for="translateTo in options.translateTo"
+                            :key="translateTo" :value="translateTo"
+                        ) {{ translateTo }}
+                div
+                    h2 Search Engine
+                    CheckBoxRow(:array="options.searchEngine")
+
+                    
+</template>
 
 <style lang="scss">
 .submit.btn{
