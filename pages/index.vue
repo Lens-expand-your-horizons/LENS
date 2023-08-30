@@ -79,11 +79,11 @@ const options = {
 .room 
     h1 LENS
     form(action="search", method="get") 
-        input(type="search", enterkeyhint="search", name="q", placeholder="Search...")
-        label(for="search")
+        input#q(type="search", enterkeyhint="search", name="q", placeholder="Search...")
+        label(for="q")
             svg(viewBox="0 0 24 24")
                 path(:d="mdiGlasses")
-        input.hide(type="submit", name="search" value="Search")
+        input#search.hide(type="submit", name="search", value="Search")
         label(for="search")
             svg(viewBox="0 0 24 24")
                 path(:d="mdiSearchWeb")
