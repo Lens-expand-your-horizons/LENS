@@ -5,7 +5,7 @@
             .lens 
                 img(src="/lens.svg", alt="lens")
             .glasses 
-                img(src="glasses.svg", alt="glasses")
+                img(src="/glasses.svg", alt="glasses")
         .searchbox 
             input(type="search", style="width: 400px; height: 40px; border-radius: 30px;",
             name="q", placeholder="     検索/Webサイト名を入力") 
