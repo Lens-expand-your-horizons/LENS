@@ -23,8 +23,10 @@
 			"opensearchdescription",
 			"Suspendisse",
 			"tortor",
-			"ultricies"
-		]
+			"ultricies",
+			"Vite"
+		],
+		"svg.preview.background": "transparent"
 	},
 	"extensions": {
 		"recommendations": [

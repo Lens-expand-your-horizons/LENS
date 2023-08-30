@@ -6,5 +6,8 @@
   <Image width="16" height="16" type="image/x-icon">https://lens-s.com/favicon.ico</Image>
   <Url type="text/html" template="https://lens-s.com/search?q={searchTerms}&m=osd"/>
   <!--Url type="application/x-suggestions+json" template="[suggestionURL]"/-->
+  <Url type="application/opensearchdescription+xml" rel="self"
+     template="https://lens-s.com/osd.xml" />
+
   <moz:SearchForm>https://lens-s.com/</moz:SearchForm>
 </OpenSearchDescription>
