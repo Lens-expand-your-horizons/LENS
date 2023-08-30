@@ -5,39 +5,40 @@
             .lens 
                 img(src="lens.svg", alt="lens")
             .glasses 
-                svg(viewBox="0 0 24 24")
-                    path(:d="mdiGlasses")
+                img(src="glasses.svg", alt="glasses")
         .searchbox 
             input(type="search", style="width: 400px; height: 40px; border-radius: 30px;",
-            name="q", placeholder="  検索/Webサイト名を入力") 
+            name="q", placeholder="     検索/Webサイト名を入力") 
             .searchbotton 
                 input#search(type="submit", name="search", value="Search")
-            label(for="search")
-                <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M27.5712 24.9462H26.1887L25.6987 24.4737C27.4137 22.4787 28.4462 19.8887 28.4462 17.0712C28.4462 10.7887 23.3537 5.69624 17.0712 5.69624C10.7887 5.69624 5.69623 10.7887 5.69623 17.0712C5.69623 23.3537 10.7887 28.4462 17.0712 28.4462C19.8887 28.4462 22.4787 27.4137 24.4737 25.6987L24.9462 26.1887V27.5712L33.6962 36.3037L36.3037 33.6962L27.5712 24.9462ZM17.0712 24.9462C12.7137 24.9462 9.19623 21.4287 9.19623 17.0712C9.19623 12.7137 12.7137 9.19624 17.0712 9.19624C21.4287 9.19624 24.9462 12.7137 24.9462 17.0712C24.9462 21.4287 21.4287 24.9462 17.0712 24.9462Z" fill="black"/>
-                </svg>
+            .magglass 
+                label(for="search")
+                    <svg width="30" height="30" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.5712 24.9462H26.1887L25.6987 24.4737C27.4137 22.4787 28.4462 19.8887 28.4462 17.0712C28.4462 10.7887 23.3537 5.69624 17.0712 5.69624C10.7887 5.69624 5.69623 10.7887 5.69623 17.0712C5.69623 23.3537 10.7887 28.4462 17.0712 28.4462C19.8887 28.4462 22.4787 27.4137 24.4737 25.6987L24.9462 26.1887V27.5712L33.6962 36.3037L36.3037 33.6962L27.5712 24.9462ZM17.0712 24.9462C12.7137 24.9462 9.19623 21.4287 9.19623 17.0712C9.19623 12.7137 12.7137 9.19624 17.0712 9.19624C21.4287 9.19624 24.9462 12.7137 24.9462 17.0712C24.9462 21.4287 21.4287 24.9462 17.0712 24.9462Z" fill="black"/>
+                    </svg>
         .pacountry 
             .country(v-for="country in options.country" :key="country")
                 input(type="checkbox", name="country", :value="country", :id="country")
                 label(:for="country") {{ country }}
         
-        details
-            summary Advanced Search
-            .translate 
-                    h2 Translate To
+        details 
+            summary 
+                .adbox="Advanced Search"
+            .adad  
+                .translate 
+                    regular TRANSLATE TO
                     select(name="translateTo")
                         option(
                             v-for="translateTo in options.translateTo"
                             :key="translateTo" :value="translateTo"
-                        ) {{ translateTo }}
-            .adsearch
-                .searthlanguage 
-                    h2 Search Language
+                            ) {{ translateTo }}
+                .searchlanguage  
+                    regular Search Language
                     searchLanguage(v-for="searchLanguage in options.searchLanguage" :key="searchLanguage")
                         input(type="checkbox", name="searchLanguage", :value="searchLanguage", :id="searchLanguage")
                         label(:for="searchLanguage") {{ searchLanguage }}
                 .searchengine 
-                    h2 Search Engine
+                    regular Search Engine
                     searchEngine(v-for="searchEngine in options.searchEngine" :key="searchEngine")
                         input(type="checkbox", name="searchEngine", :value="searchEngine", :id="searchEngine")
                         label(:for="searchEngine") {{ searchEngine }}
@@ -46,15 +47,13 @@
 
 <script setup>
 
-import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
-
 const options = {
     country: [
         'Japan',
         'China',
         'Korea',
-        'Taiwan',
-        'Hong Kong',
+        'Russia',
+        'Germany',
         'Thailand',
         'Philippines',
         'Vietnam',
@@ -121,8 +120,31 @@ body{
     background-color: #e7e7eb;
 }
 
+.image{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.lens{
+    width: 300px;
+    position: relative;
+    top: 30px;
+    margin-left: -30px;
+}
+
+.glasses{
+    position: relative;
+    top: 20px;
+}
+
 .searchbox{
-    border-radius: 30px;
+    text-align: center
+}
+
+.magglass{
+    margin-top: -36px;
+    margin-left: 330px;
 }
 
 .searchbotton{
@@ -132,23 +154,23 @@ body{
 .pacountry{
     display: flex;
     overflow-x: scroll;
-    align-items:stretch; 
+    overflow: scroll;
+    width: 450px;
+    align-items:stretch;
+    position: relative;
+    top: 20px;
+    left: 420px;
 }
 
-.searthlanguage {
-    display: flex;
-    overflow-x: scroll;
-    align-items:stretch; 
+.pacountry::-webkit-scrollbar{
+  display: none;
 }
-.searchengine{
-    display: flex;
-    overflow-x: scroll;
-    align-items:stretch; 
-}
+
 .country label{
     display: block;
-    background: #c8eac3;
+    background: #fff;
     color: #000;
+    border: 2px solid #111;
     padding: 10px;
     margin: 10px;
     box-sizing: border-box;
@@ -159,16 +181,74 @@ body{
     cursor: pointer;
 }
 .country input:checked+label{
-    background: #1a720d;
-    color: #FFF;
+    background: #d9d9d9;
+    color: #111;
 }
 .country input{
     display: none;
 }
 
-.adsearch label{
+.adbox{
     display: block;
-    background: #c8eac3;
+    text-align: center;
+    border: 2px solid #111212;
+    background: #d9d9d9;
+    padding: 20px;
+    width: 300px;
+    border-radius: 30px;
+    cursor: pointer;  
+    position: relative;
+    left: 490px;
+}
+.translate {
+    background: #ffffff;
+    border: 2px solid #111;
+    border-radius: 10px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.translate select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 230px;
+    height: 2.8em;
+    padding: .4em 3.6em .4em .8em;
+    border: 2px solid #111;
+    border-radius: 3px;
+    color: #333333;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.translate select:focus {
+    outline: 1px solid #111;
+}
+
+.searchlanguage {
+    display: flex;
+    overflow-x: scroll;
+    align-items:stretch; 
+    background: #ffffff;
+    border: 2px solid #111;
+    border-radius: 3px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+.searchlanguage label{
+    display: block;
+    background: #fff;
+    border: 2px solid #111;
     color: #000;
     padding: 10px;
     margin: 10px;
@@ -179,64 +259,55 @@ body{
 
     cursor: pointer;
 }
-.adsearch input:checked+label{
-    background: #1a720d;
-    color: #FFF;
+.searchlanguage input:checked+label{
+    background: #d9d9d9;
+    color: #111;
 }
-.adsearch input{
+.searchlanguage input{
     display: none;
 }
 
-summary{
+.searchlanguage::-webkit-scrollbar{
+  display: none;
+}
+
+.searchengine{
+    display: flex;
+    overflow-x: scroll;
+    align-items:stretch;
+    background: #ffffff;
+    border: 2px solid #111;
+    border-radius: 3px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+.searchengine label{
     display: block;
-    width: 100px;
-    background: #987fc0;
+    border: 2px solid #111;
+    background: #fff;
     color: #000;
     padding: 10px;
     margin: 10px;
     box-sizing: border-box;
     text-align: center;
     text-decoration: none;
-    border-radius: 30px;
-    cursor: pointer;  
-}
+    border-radius: 20px;
 
-.image{
-    display: flex;
-}
-.lens{
-    position: relative;  
-    top: 0px;
-    left: 100px; 
-}
-.glasses{
-    position: relative;  
-    top: 0px;
-    left: 150px;
-}
-
-.translate {
-    position: relative;
-    top: 0px;
-    left: 0px;
-}
-
-.translate select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    min-width: 230px;
-    height: 2.8em;
-    padding: .4em 3.6em .4em .8em;
-    border: 2px solid #2589d0;
-    border-radius: 3px;
-    color: #333333;
-    font-size: 1em;
     cursor: pointer;
 }
-
-.translate select:focus {
-    outline: 1px solid #2589d0;
+.searchengine input:checked+label{
+    background: #d9d9d9;
+    color: #111;
+}
+.searchengine input{
+    display: none;
 }
 
+.searchengine::-webkit-scrollbar{
+  display: none;
+}
 </style>
