@@ -81,24 +81,24 @@ const options = {
     form(action="search", method="get")
         label(for="q")
         SearchBox
-        div
+        fieldset
             CheckBoxRow(:array="options.country")
 
         details.advS
             summary.toggle Advanced Search
             div
-                div
-                    h2 Search Language
+                fieldset
+                    legend Search Language
                     CheckBoxRow(:array="options.searchLanguage")
-                div
-                    h2 Translate To
+                fieldset
+                    legend Translate To
                     select(name="translateTo")
                         option(
                             v-for="translateTo in options.translateTo"
                             :key="translateTo" :value="translateTo"
                         ) {{ translateTo }}
-                div
-                    h2 Search Engine
+                fieldset
+                    legend Search Engine
                     CheckBoxRow(:array="options.searchEngine")
 
                     
