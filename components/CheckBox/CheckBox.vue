@@ -18,13 +18,13 @@ const emits = defineEmits(['click']);
 </script>
 
 <template lang="pug">
-.root
+.CheckBox
     input(type="checkbox", name="country", :value="props.label", :id="props.label")
     label(:for="props.label") {{ props.label }}
 </template>
 
 <style lang="scss">
-.root {
+.CheckBox {
     display: flex;
     align-items: center;
     font-size: 1rem;

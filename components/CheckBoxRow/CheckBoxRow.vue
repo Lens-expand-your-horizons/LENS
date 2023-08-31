@@ -20,7 +20,7 @@ const emits = defineEmits(['click']);
 </script>
 
 <template lang="pug">
-.root
+.CheckBoxRow
     CheckBox.item(
         v-for="item in props.array"
         :label="item"
@@ -30,9 +30,11 @@ const emits = defineEmits(['click']);
 </template>
 
 <style lang="scss">
-.root {
+.CheckBoxRow {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    overflow-x: scroll;
     .item{
         flex-shrink: 0;
         overflow: hidden;

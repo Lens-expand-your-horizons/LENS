@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
+import { mdiGlasses } from '@mdi/js';
 
 useSeoMeta({
     title: 'LENS: expand your horizons',
@@ -76,22 +76,16 @@ const options = {
 </script>
 
 <template lang="pug">
-.room 
-    h1 LENS
-    form(action="search", method="get") 
-        input#q(type="search", enterkeyhint="search", name="q", placeholder="Search...")
+.room
+    TitleRow
+    form(action="search", method="get")
         label(for="q")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiGlasses")
-        input#search.hide(type="submit", name="search", value="Search")
-        label(for="search")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiSearchWeb")
+        SearchBox
         div
             CheckBoxRow(:array="options.country")
 
-        details
-            summary Advanced Search
+        details.advS
+            summary.toggle Advanced Search
             div
                 div
                     h2 Search Language
@@ -111,7 +105,7 @@ const options = {
 </template>
 
 <style lang="scss">
-.submit.btn{
-    display: none;
+.advS {
+    width: 80%;
 }
 </style>
