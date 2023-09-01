@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { mdiGlasses } from '@mdi/js';
-
 useSeoMeta({
     title: 'LENS: expand your horizons',
     description: 'Meta search engine that allows you to search the web in different languages and different countries.',
@@ -76,36 +74,90 @@ const options = {
 </script>
 
 <template lang="pug">
-.room
-    TitleRow
-    form(action="search", method="get")
-        label(for="q")
-        SearchBox
-        fieldset
+.page.flex-container
+    TitleRow.flex-item
+    form(action="search", method="get").page__container.flex-item.flex-container
+        SearchBox.flex-item
+        fieldset.flex-item.page__field
             CheckBoxRow(:array="options.country")
 
-        details.advS
-            summary.toggle Advanced Search
-            div
-                fieldset
-                    legend Search Language
-                    CheckBoxRow(:array="options.searchLanguage")
-                fieldset
-                    legend Translate To
-                    select(name="translateTo")
-                        option(
-                            v-for="translateTo in options.translateTo"
-                            :key="translateTo" :value="translateTo"
-                        ) {{ translateTo }}
-                fieldset
-                    legend Search Engine
-                    CheckBoxRow(:array="options.searchEngine")
+        details.page__container.page__container-wide.flex-item.flex-container
+            summary.page__toggle.flex-item Advanced Search
+            fieldset.flex-item.page__field
+                legend.page__group-title Search Language
+                CheckBoxRow(:array="options.searchLanguage")
+            fieldset.flex-item.page__field
+                legend.page__group-title Translate To
+                select(name="translateTo")
+                    option(
+                        v-for="translateTo in options.translateTo"
+                        :key="translateTo" :value="translateTo"
+                    ) {{ translateTo }}
+            fieldset.flex-item.page__field
+                legend.page__group-title Search Engine
+                CheckBoxRow(:array="options.searchEngine")
 
                     
 </template>
 
 <style lang="scss">
-.advS {
+.flex {
+    &-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &--row{
+            flex-direction: row;
+        }
+    }
+    &-item{
+        flex-shrink: 0;
+        overflow: visible;
+    }
+}
+
+.page {
     width: 80%;
+    margin: 0 auto;
+    min-height: 100cqh;
+    gap: 2rem;
+    container: page / inline-size;
+
+    &__container{
+        gap: 2rem;
+        max-width: 100cqw;
+
+        &-wide{
+            width: 100cqh;
+        }
+    }
+
+    &__field{
+        max-width: 100cqw;
+        border: none;
+    }
+
+    &__toggle{
+        display: flex;
+        width: 142px;
+        height: 42px;
+        overflow: hidden;
+        padding: 19px 32px;
+        border-radius: 34px;
+        border: 4px solid rgba(38, 45, 32, 0.66);
+        background: #FFF;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    &__group-title{
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
 }
 </style>

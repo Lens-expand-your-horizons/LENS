@@ -1,12 +1,10 @@
 <template lang="pug">
-div
-    slot
+slot
 </template>
-<script>
-export default {
-    
-}
+
+<script setup>
 </script>
+
 <style lang="scss">
 $bg: #e7e7eb;
 
