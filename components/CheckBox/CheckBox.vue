@@ -33,7 +33,8 @@ const emits = defineEmits(['click']);
         padding: .5rem;
         border-radius: 1.2rem;
         text-align: center;
-        background: #c8eac3;
+        /*background: #c8eac3;*/
+        background-color: red;
         color: #000;
         cursor: pointer;
     }
