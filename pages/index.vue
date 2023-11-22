@@ -81,8 +81,8 @@ const options = {
         fieldset.flex-item.page__field
             CheckBoxRow(:array="options.country")
 
-        details.page__container.page__container-wide.flex-item.flex-container
-            summary.page__toggle.flex-item Advanced Search
+        details.page__container.flex-item.flex-container
+            AdvancedSearchToggle.flex-item
             fieldset.flex-item.page__field
                 legend.page__group-title Search Language
                 CheckBoxRow(:array="options.searchLanguage")
@@ -128,30 +128,11 @@ const options = {
     &__container{
         gap: 2rem;
         max-width: 100cqw;
-
-        &-wide{
-            width: 100cqh;
-        }
     }
 
     &__field{
         max-width: 100cqw;
         border: none;
-    }
-
-    &__toggle{
-        display: flex;
-        width: 142px;
-        height: 42px;
-        overflow: hidden;
-        padding: 19px 32px;
-        border-radius: 34px;
-        border: 4px solid rgba(38, 45, 32, 0.66);
-        background: #FFF;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
     }
 
     &__group-title{
