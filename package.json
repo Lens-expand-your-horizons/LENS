@@ -10,6 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@storybook/addon-essentials": "^7.3.2",
