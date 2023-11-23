@@ -1,13 +1,11 @@
 <template lang="pug">
 div
   .page.flex-container
+  .Header 
     LensRow.flex-item
-  .Header
-    button.back-button(onclick="window.location.href='/'") ホームに戻る
-    form(action="/English" method="get")
-      input(type="search", name="q", enterkeyhint="search", placeholder="Search...", :value="$route.query.q")
-      input(type="submit", name="search", value="Search", class="hide")
-      label(for="search")
+    form(action="Japanese", method="get").page__container.flex-item.flex-container
+        SearchBoxResult.flex-item
+  .back-button(onclick="window.location.href='/'") ホームに戻る
   .Contents
     .result
       .column(v-for="c in columns" :key="c.searchEngine")
@@ -54,12 +52,17 @@ const columns = [
 </script>
 
 <style lang="scss">
+
 body{
-margin: 20px; /* bodyの外側の余白を指定する */
-padding: 50px 10px 50px 10px; /* bodyの内側余白を指定する(上:右:下:左) */
-background-color: #fff;
+  margin: 20px; /* bodyの外側の余白を指定する */
+  padding: 50px 10px 50px 10px; /* bodyの内側余白を指定する(上:右:下:左) */
+  background-color: #fff;
 }
-.flex-container {
+.flex-item {
+  position: relative;
+  z-index: 1; /* LensRowをその他の要素よりも上に配置 */
+}
+.page__container.flex-item.flex-container{
   position: relative;
   z-index: 1; /* LensRowをその他の要素よりも上に配置 */
 }
@@ -77,7 +80,9 @@ background-color: #fff;
   padding: 0 20px; /* 内側の余白を設定 */
   z-index: 0; /* 必要に応じてz-indexを調整 */
 }
+
 .back-button {
+  margin: 40px;
   width: 100px;
   height: 40px;
   border-radius: 50px; /* 楕円形にするための設定 */
@@ -89,21 +94,6 @@ background-color: #fff;
 }
 
 /* 検索窓のスタイル */
-
-form {
-  margin-bottom: 20px;
-  /* 他のスタイルを追加 */
-}
-
-input[type="search"] {
-  width: 300px;
-  height: 40px;
-  border-radius: 20px;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  /* 他のスタイルを追加 */
-}
 
 /* ボタンのスタイル（非表示のためのスタイルも含む） */
 input[type="submit"] {

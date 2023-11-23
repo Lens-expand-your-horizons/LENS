@@ -13,6 +13,8 @@ useSeoMeta({
     TitleRow.flex-item
     form(action="Japanese", method="get").page__container.flex-item.flex-container
         SearchBox.flex-item
+        hr
+        p 英文のＷebサイトを日本語で検索・閲覧できます
 </template>
 
 <style lang="scss">
@@ -25,7 +27,7 @@ body {
 
 /* フォームのスタイル */
 .page.flex-container {
-  margin: 170px;
+  margin: 150px;
   /* 他のスタイルを追加 */
 }
 
@@ -33,7 +35,16 @@ body {
   margin: 30px;
   /* 他のスタイルを追加 */
 }
+hr {
+  border: none;
+  border-bottom: 1px solid black; /* 下線のスタイルを指定 */
+}
 
+p {
+  margin: 50px;
+  text-decoration: underline; /* テキストの下線を追加 */
+  color: gray;
+}
 /* 検索結果のスタイル */
 .result {
   display: flex;

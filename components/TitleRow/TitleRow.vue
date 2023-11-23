@@ -1,11 +1,5 @@
-<script setup lang="ts">
-import { mdiGlasses } from '@mdi/js';
-</script>
-
 <template lang="pug">
 hgroup.titleRow
-    svg(viewBox="0 0 24 24")
-        path(:d="mdiGlasses")
     h1 LENS
 </template>
 
@@ -16,14 +10,11 @@ hgroup.titleRow
     justify-content: center;
     margin: 0;
     padding: 0;
-    svg {
-        width: 2rem;
-        height: 2rem;
-    }
     h1 {
-        font-size: 2rem;
-        margin: 0;
-        padding: 0;
+        font-size: 3.3rem;
+        margin: 1;
+        padding: 3;
+        font-family : cursive;
     }
 }
 </style>

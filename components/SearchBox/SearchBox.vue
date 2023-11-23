@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    width: 400px; /* 幅を調整 */
+    width: 500px; /* 幅を調整 */
     height: 40px; /* 高さを適切なサイズに調整 */
     border: 2px solid #000; /* 外枠の線を追加 */
     border-radius: 20px; /* 楕円形にするための適切な値を設定 */
