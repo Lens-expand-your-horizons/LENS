@@ -7,7 +7,7 @@ summary.advanced-search-toggle Advanced Search
 
 <style lang="scss">
 .advanced-search-toggle{
-    width: 27rem;
+    width: 100rem;
     height: 4rem;
     padding: 1.1875rem 2rem;
     border-radius: 1.25rem;

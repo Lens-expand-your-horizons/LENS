@@ -25,7 +25,7 @@ const emits = defineEmits(['submit']);
     }
     label{
         svg{
-            width: 2rem;
+            width: 20rem;
             height: 2rem;
         }
         cursor: pointer;

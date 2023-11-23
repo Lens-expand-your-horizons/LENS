@@ -56,5 +56,29 @@ const columns = [
 </script>
 
 <style lang="scss">
+body {
+  background-color: #fa4d4d;
+}
 
+/* フォームのスタイル */
+form {
+  margin-bottom: 20px;
+  /* 他のスタイルを追加 */
+}
+
+/* 検索結果のスタイル */
+.result {
+  display: flex;
+  flex-direction: column;
+  /* 他のスタイルを追加 */
+}
+
+/* 検索結果の各列のスタイル */
+.column {
+  margin-bottom: 20px;
+  /* 他のスタイルを追加 */
+}
+
+/* その他、必要なスタイルを追加 */
+/* ... */
 </style>

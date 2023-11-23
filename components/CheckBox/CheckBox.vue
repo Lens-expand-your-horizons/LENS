@@ -34,14 +34,14 @@ const emits = defineEmits(['click']);
         border-radius: 1.2rem;
         text-align: center;
         /*background: #c8eac3;*/
-        background-color: red;
+        background-color: blue($color: #000000);
         color: #000;
         cursor: pointer;
     }
     input {
         display: none;
         &:checked + label {
-            background: #1a720d;
+            background: rgb(215, 226, 214);
             color: #FFF;
         }
     }

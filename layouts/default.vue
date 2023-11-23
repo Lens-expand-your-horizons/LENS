@@ -47,14 +47,14 @@ $bg: #e7e7eb;
 }
 
 body{
-    background-color: $bg;
+    background-color: #1414c3;
 }
 
 .pwa-toast {
     position: fixed;
     right: 0;
     bottom: 0;
-    margin: 16px;
+    margin: 100px;
     padding: 12px;
     border: 1px solid #8885;
     border-radius: 4px;

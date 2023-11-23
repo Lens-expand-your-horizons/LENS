@@ -101,6 +101,35 @@ const options = {
 </template>
 
 <style lang="scss">
+/* ここにCSSを記述します */
+
+/* ページ全体の背景色を指定 */
+body {
+  background-color: rgb(36, 226, 52);
+}
+
+/* フォームのスタイル */
+form {
+  margin-bottom: 20px;
+  /* 他のスタイルを追加 */
+}
+
+/* 検索結果のスタイル */
+.result {
+  display: flex;
+  flex-direction: column;
+  /* 他のスタイルを追加 */
+}
+
+/* 検索結果の各列のスタイル */
+.column {
+  margin-bottom: 20px;
+  /* 他のスタイルを追加 */
+}
+
+/* その他、必要なスタイルを追加 */
+/* ... */
+
 .flex {
     &-container{
         display: flex;
@@ -118,27 +147,5 @@ const options = {
     }
 }
 
-.page {
-    width: 80%;
-    margin: 0 auto;
-    min-height: 100cqh;
-    gap: 2rem;
-    container: page / inline-size;
 
-    &__container{
-        gap: 2rem;
-        max-width: 100cqw;
-    }
-
-    &__field{
-        max-width: 100cqw;
-        border: none;
-    }
-
-    &__group-title{
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
-}
 </style>
