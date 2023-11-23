@@ -1,20 +1,24 @@
 <template lang="pug">
 div
+  .page.flex-container
+    LensRow.flex-item
+  .Header
+    button.back-button(onclick="window.location.href='/'") ホームに戻る
     form(action="/search" method="get")
-        input(type="search", name="q", enterkeyhint="search", placeholder="Search...", :value="$route.query.q")
-        input.hide(type="submit", name="search" value="Search")
-        label(for="search")
+      input(type="search", name="q", enterkeyhint="search", placeholder="Search...", :value="$route.query.q")
+      input(type="submit", name="search", value="Search", class="hide")
+      label(for="search")
+  .Contents
     .result
-        .column(v-for="c in columns" :key="c.searchEngine")
-            h2 {{c.searchEngine}}
-            div
-                div(v-for="row in c.result" :key="row.id")
-                    h3 {{ row.name }}
-                    div {{ row.detail }}
+      .column(v-for="c in columns" :key="c.searchEngine")
+        h2 {{c.searchEngine}}
+        div
+          div(v-for="row in c.result" :key="row.id")
+            h3 {{ row.name }}
+            div {{ row.detail }}
 </template>
 
 <script setup lang="ts">
-import { mdiSearchWeb, mdiGlasses } from '@mdi/js';
 const columns = [
     {
         searchEngine: 'Google',
@@ -50,8 +54,66 @@ const columns = [
 </script>
 
 <style lang="scss">
-body {
-  background-color: #fff;
+body{
+margin: 20px; /* bodyの外側の余白を指定する */
+padding: 50px 10px 50px 10px; /* bodyの内側余白を指定する(上:右:下:左) */
+background-color: #fff;
+}
+.flex-container {
+  position: relative;
+  z-index: 1; /* LensRowをその他の要素よりも上に配置 */
+}
+.Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px; /* 高さを変更 */
+  background-color: #A7C2EA;
+  color: white;
+  display: flex; /* 子要素を横並びにするために追加 */
+  align-items: center; /* 子要素を中央揃えにするために追加 */
+  justify-content: space-between; /* 子要素を均等に配置するために追加 */
+  padding: 0 20px; /* 内側の余白を設定 */
+  z-index: 0; /* 必要に応じてz-indexを調整 */
+}
+.back-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 50px; /* 楕円形にするための設定 */
+  background-color: blue; /* 青色の背景 */
+  color: white; /* 文字色 */
+  text-align: center; /* 文字を中央揃え */
+  line-height: 40px; /* ボタンの高さと同じにする */
+  cursor: pointer; /* カーソルをポインターに変更 */
+}
+
+/* 検索窓のスタイル */
+
+form {
+  margin-bottom: 20px;
+  /* 他のスタイルを追加 */
+}
+
+input[type="search"] {
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  /* 他のスタイルを追加 */
+}
+
+/* ボタンのスタイル（非表示のためのスタイルも含む） */
+input[type="submit"] {
+  display: none;
+  /* ボタンを非表示にする */
+}
+
+label {
+  display: block;
+  /* 他のスタイルを追加 */
 }
 
 /* フォームのスタイル */
