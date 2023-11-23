@@ -4,7 +4,7 @@ div
     LensRow.flex-item
   .Header
     button.back-button(onclick="window.location.href='/'") ホームに戻る
-    form(action="/search" method="get")
+    form(action="/English" method="get")
       input(type="search", name="q", enterkeyhint="search", placeholder="Search...", :value="$route.query.q")
       input(type="submit", name="search", value="Search", class="hide")
       label(for="search")
@@ -26,12 +26,12 @@ const columns = [
             {
                 id: 1,
                 name: 'result1',
-                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+                detail: '日本語でほにゃらら　日本語でほにゃらら'
             },
             {
                 id: 2,
                 name: 'result2',
-                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+                detail: '日本語ではにゃほれ　日本語ではにゃほれ'
             },
         ]
     },
