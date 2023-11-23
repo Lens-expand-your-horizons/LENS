@@ -105,7 +105,7 @@ const options = {
 
 /* ページ全体の背景色を指定 */
 body {
-  background-color: rgb(36, 226, 52);
+  background-color: #fff;
 }
 
 /* フォームのスタイル */

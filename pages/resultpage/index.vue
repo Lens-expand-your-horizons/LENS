@@ -1,15 +1,9 @@
 <template lang="pug">
 div
     form(action="/search" method="get")
-        NuxtLink(to="/")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiGlasses")
-            h1 LENS
         input(type="search", name="q", enterkeyhint="search", placeholder="Search...", :value="$route.query.q")
         input.hide(type="submit", name="search" value="Search")
         label(for="search")
-            svg(viewBox="0 0 24 24")
-                path(:d="mdiSearchWeb")
     .result
         .column(v-for="c in columns" :key="c.searchEngine")
             h2 {{c.searchEngine}}
@@ -57,7 +51,7 @@ const columns = [
 
 <style lang="scss">
 body {
-  background-color: #fa4d4d;
+  background-color: #fff;
 }
 
 /* フォームのスタイル */

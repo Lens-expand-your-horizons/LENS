@@ -38,16 +38,12 @@ main
 </template>
 
 <style lang="scss">
-$bg: #e7e7eb;
+$bg: #fff;
 
 *, *::before, *::after{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-body{
-    background-color: #1414c3;
 }
 
 .pwa-toast {
