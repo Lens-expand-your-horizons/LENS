@@ -6,7 +6,7 @@ class="Sss"
       LensRow.flex-item
       form(action="Japanese", method="get").page__container.flex-item.flex-container
         SearchBoxResult.flex-item
-      button.back-button(onclick="goToPage('https://lens-s.com')")
+      button.back-button(onclick='https://lens-s.com')
         | Home
     .Contents
       .result
