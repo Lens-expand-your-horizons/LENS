@@ -31,6 +31,7 @@
     height: 40px; /* 高さを適切なサイズに調整 */
     border: 2px solid #000; /* 外枠の線を追加 */
     border-radius: 20px; /* 楕円形にするための適切な値を設定 */
+    box-shadow: 2px 2px 4px gray;
   }
 
   .q {

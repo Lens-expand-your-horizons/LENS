@@ -4,8 +4,8 @@ div
   .Header 
     LensRow.flex-item
     form(action="Japanese", method="get").page__container.flex-item.flex-container
-        SearchBoxResult.flex-item
-  .back-button(onclick="window.location.href='/'") ホームに戻る
+      SearchBoxResult.flex-item
+    back-button(onclick="Homepage", method="get") Home
   .Contents
     .result
       .column(v-for="c in columns" :key="c.searchEngine")
@@ -58,11 +58,13 @@ body{
   padding: 50px 10px 50px 10px; /* bodyの内側余白を指定する(上:右:下:左) */
   background-color: #fff;
 }
-.flex-item {
+.flex-item{
+  align-self: start;
   position: relative;
+  color: #111;
   z-index: 1; /* LensRowをその他の要素よりも上に配置 */
 }
-.page__container.flex-item.flex-container{
+form{
   position: relative;
   z-index: 1; /* LensRowをその他の要素よりも上に配置 */
 }
@@ -71,48 +73,26 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px; /* 高さを変更 */
+  height: 90px; /* 高さを変更 */
   background-color: #A7C2EA;
   color: white;
   display: flex; /* 子要素を横並びにするために追加 */
-  align-items: center; /* 子要素を中央揃えにするために追加 */
-  justify-content: space-between; /* 子要素を均等に配置するために追加 */
-  padding: 0 20px; /* 内側の余白を設定 */
+  gap: 30px;
+  padding: 25px; /* 内側の余白を設定 */
   z-index: 0; /* 必要に応じてz-indexを調整 */
 }
 
-.back-button {
-  margin: 40px;
+back-button {
   width: 100px;
   height: 40px;
   border-radius: 50px; /* 楕円形にするための設定 */
-  background-color: blue; /* 青色の背景 */
-  color: white; /* 文字色 */
+  background-color: #fff; /* 青色の背景 */
+  color: #111; /* 文字色 */
   text-align: center; /* 文字を中央揃え */
   line-height: 40px; /* ボタンの高さと同じにする */
   cursor: pointer; /* カーソルをポインターに変更 */
 }
 
-/* 検索窓のスタイル */
-
-/* ボタンのスタイル（非表示のためのスタイルも含む） */
-input[type="submit"] {
-  display: none;
-  /* ボタンを非表示にする */
-}
-
-label {
-  display: block;
-  /* 他のスタイルを追加 */
-}
-
-/* フォームのスタイル */
-form {
-  margin-bottom: 20px;
-  /* 他のスタイルを追加 */
-}
-
-/* 検索結果のスタイル */
 .result {
   display: flex;
   flex-direction: column;
@@ -125,6 +105,4 @@ form {
   /* 他のスタイルを追加 */
 }
 
-/* その他、必要なスタイルを追加 */
-/* ... */
 </style>

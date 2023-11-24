@@ -1,7 +1,7 @@
 
 import { SearchBoxResult } from '.nuxt/components';
 <template>
-    <div class="SearchBoxResult">
+    <div class="SearchBoxResult" >
     <input id="q" class="q" type="search" enterkeyhint="search" name="q" placeholder="Search...">
     <button id="search" @click="executeSearch">
       <svg width="24" height="24" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,37 +25,43 @@ import { SearchBoxResult } from '.nuxt/components';
   
 <style scoped>
   .SearchBoxResult {
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    width: 500px; /* 幅を調整 */
-    height: 40px; /* 高さを適切なサイズに調整 */
-    border: 2px solid #000; /* 外枠の線を追加 */
-    border-radius: 20px; /* 楕円形にするための適切な値を設定 */
-  }
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 500px; /* 幅を調整 */
+  height: 40px; /* 高さを適切なサイズに調整 */
+  border: 2px solid #000; /* 外枠の線を追加 */
+  border-radius: 20px; /* 楕円形にするための適切な値を設定 */
+  background-color: #fff; /* 背景色を設定 */
+  box-shadow: 2px 2px 4px gray;
+}
 
-  .q {
-    flex: 1;
-    font-size: 1.5rem; /* 文字サイズを小さく調整 */
-    padding: 0 1rem;
-    padding-right: 40px; /* 検索アイコンのために右側に余白を設定 */
-    border: none; /* 見た目上のボーダーを無効にする */
-    outline: none; /* フォーカス時のアウトラインを無効にする（任意） */
-  }
+/* 他のスタイルはそのまま保持 */
+.q {
+  color: #111; /* テキストの色を白に設定 */
+  flex: 1;
+  font-size: 1.5rem; /* 文字サイズを小さく調整 */
+  padding: 0 1rem;
+  padding-right: 40px; /* 検索アイコンのために右側に余白を設定 */
+  border: none; /* 見た目上のボーダーを無効にする */
+  outline: none; /* フォーカス時のアウトラインを無効にする（任意） */
+}
 
-  #search {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
+/* 他のスタイルはそのまま保持 */
+#search {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #fff; /* アイコンの色を白に設定 */
+}
 
 </style>
   

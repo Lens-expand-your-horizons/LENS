@@ -31,8 +31,10 @@ body {
   /* 他のスタイルを追加 */
 }
 
-.page__container.flex-item.flex-container{
-  margin: 30px;
+form{
+    justify-content: flex-start; /* 要素を左寄せにする */
+    padding-left: 20px; /* 左側の余白を追加 */
+    margin: 30px;
   /* 他のスタイルを追加 */
 }
 hr {
@@ -63,6 +65,8 @@ p {
 
 .flex {
     &-container{
+        justify-content: flex-start; /* 要素を左寄せにする */
+        padding-left: 20px; /* 左側の余白を追加 */
         display: flex;
         flex-direction: column;
         justify-content: center;
