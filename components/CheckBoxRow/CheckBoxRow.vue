@@ -34,7 +34,7 @@ const emits = defineEmits(['click']);
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    max-width: 100cqw;
+    max-width: 100cqw; 
     padding: 1rem 0;
     overflow-x: scroll;
     mask: linear-gradient(to right, #fff, #fff calc(100cqw - 5rem), transparent);

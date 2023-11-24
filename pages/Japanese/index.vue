@@ -1,19 +1,21 @@
 <template lang="pug">
 div
-  .page.flex-container
-  .Header 
-    LensRow.flex-item
-    form(action="Japanese", method="get").page__container.flex-item.flex-container
-      SearchBoxResult.flex-item
-    back-button(onclick="Homepage", method="get") Home
-  .Contents
-    .result
-      .column(v-for="c in columns" :key="c.searchEngine")
-        h2 {{c.searchEngine}}
-        div
-          div(v-for="row in c.result" :key="row.id")
-            h3 {{ row.name }}
-            div {{ row.detail }}
+class="Sss"
+.page.flex-container
+    .Header 
+      LensRow.flex-item
+      form(action="Japanese", method="get").page__container.flex-item.flex-container
+        SearchBoxResult.flex-item
+      button.back-button(onclick="goToPage('https://lens-s.com')")
+        | Home
+    .Contents
+      .result
+        .column(v-for="c in columns" :key="c.searchEngine")
+          h2 {{c.searchEngine}}
+          div
+            div(v-for="row in c.result" :key="row.id")
+              h3 {{ row.name }}
+              div {{ row.detail }}
 </template>
 
 <script setup lang="ts">
@@ -23,31 +25,16 @@ const columns = [
         result: [
             {
                 id: 1,
-                name: 'result1',
-                detail: '日本語でほにゃらら　日本語でほにゃらら'
+                name: 'ニュースタイトル',
+                detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
             },
             {
                 id: 2,
-                name: 'result2',
-                detail: '日本語ではにゃほれ　日本語ではにゃほれ'
+                name: 'ニュースタイトル',
+                detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
             },
         ]
     },
-    {
-        searchEngine: 'Bing',
-        result: [
-            {
-                id: 1,
-                name: 'result1',
-                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-            },
-            {
-                id: 2,
-                name: 'result2',
-                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-            },
-        ]
-    }
 ]
 </script>
 
@@ -82,7 +69,7 @@ form{
   z-index: 0; /* 必要に応じてz-indexを調整 */
 }
 
-back-button {
+button.back-button {
   width: 100px;
   height: 40px;
   border-radius: 50px; /* 楕円形にするための設定 */
@@ -90,19 +77,15 @@ back-button {
   color: #111; /* 文字色 */
   text-align: center; /* 文字を中央揃え */
   line-height: 40px; /* ボタンの高さと同じにする */
-  cursor: pointer; /* カーソルをポインターに変更 */
+  cursor: pointer;
 }
 
 .result {
+  width: 600px;
+  margin-left: 130px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   /* 他のスタイルを追加 */
 }
-
-/* 検索結果の各列のスタイル */
-.column {
-  margin-bottom: 20px;
-  /* 他のスタイルを追加 */
-}
-
 </style>
