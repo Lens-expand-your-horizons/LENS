@@ -27,6 +27,9 @@ export default defineNuxtConfig({
   modules: [
     '@vite-pwa/nuxt'
   ],
+  plugins: [
+    '~/plugins/gcse.client.js',
+  ],
   pwa: {
     registerType: "autoUpdate",
     includeAssets: ["favicon.ico"],

@@ -3,13 +3,18 @@ import { mdiMagnify } from '@mdi/js';
 
 const emits = defineEmits(['submit']);
 
+mounted() {
+    this.$gcse.load(this.callback());
+},
+
 </script>
 
 <template lang="pug">
 .SearchBox
+    script(async, src="https://cse.google.com/cse.js?cx=018b4df2d1b814105")
+    .gcse-search
     input#q.q(type="search", enterkeyhint="search", name="q", placeholder="Search...")
-    input#search.hide(type="submit", name="search", value="Search")
-    label(for="search")
+    label(for="q")
         svg(viewBox="0 0 24 24")
             path(:d="mdiMagnify")
 </template>
