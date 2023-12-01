@@ -14,7 +14,7 @@ useSeoMeta({
     form(action="Japanese", method="get").page__container.flex-item.flex-container
         SearchBox.flex-item
         hr
-        p 英文のＷebサイトを日本語で検索・閲覧できます
+        p 英文のWebサイトを日本語で検索・閲覧できます
 </template>
 
 <style lang="scss">
