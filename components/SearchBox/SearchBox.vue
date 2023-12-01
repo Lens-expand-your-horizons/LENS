@@ -8,7 +8,6 @@ const emits = defineEmits(['submit']);
 <template lang="pug">
 .SearchBox
     input#q.q(type="search", enterkeyhint="search", name="q", placeholder="Search...")
-    input#search.hide(type="submit", name="search", value="Search")
     label(for="search")
         svg(viewBox="0 0 24 24")
             path(:d="mdiMagnify")
