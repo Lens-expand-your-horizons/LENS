@@ -1,14 +1,3 @@
-<template>
-    <div class="SearchBox">
-    <input id="q" class="q" type="search" enterkeyhint="search" name="q" placeholder="Search...">
-    <button id="search" @click="executeSearch">
-      <svg width="24" height="24" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path :d="searchIconPath" fill="black" />
-      </svg>
-    </button>
-  </div>
-</template>
-  
 <script setup>
   import { defineEmits } from 'vue';
   
@@ -20,6 +9,14 @@
     emits('submit'); // 検索実行のイベントを発火
   };
 </script>
+
+<template lang="pug">
+.SearchBox
+  input#q.q(type="search" enterkeyhint="search" name="q" placeholder="Search...")
+  button#search(@click="executeSearch")
+    svg(width="24" height="24" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg")
+      path(:d="searchIconPath" fill="black")
+</template>
   
 <style scoped>
   .SearchBox {
