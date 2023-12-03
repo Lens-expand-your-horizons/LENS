@@ -16,10 +16,16 @@ useSeoMeta({
         hr
         //p 英文のＷebサイトを日本語で検索・閲覧できます
         SelectCountries.flex-item.ta 
+img.fit(
+  src="/S__15761435.jpg"
+)
 </template>
 
 <style lang="scss">
 /* ここにCSSを記述します */
+.fit {
+  width: 100%;
+}
 
 /* ページ全体の背景色を指定 */
 body {
