@@ -10,11 +10,12 @@ useSeoMeta({
 
 <template lang="pug">
 .page.flex-container
-    TitleRow.flex-item
+    TitleRow.flex-item.ka
     form(action="Japanese", method="get").page__container.flex-item.flex-container
-        SearchBox.flex-item
+        SearchBox.flex-item.sa
         hr
-        p 英文のＷebサイトを日本語で検索・閲覧できます
+        //p 英文のＷebサイトを日本語で検索・閲覧できます
+        SelectCountries.flex-item.ta 
 </template>
 
 <style lang="scss">
@@ -36,6 +37,9 @@ form{
     padding-left: 20px; /* 左側の余白を追加 */
     margin: 30px;
   /* 他のスタイルを追加 */
+.ta{
+  margin: 30px;
+}
 }
 hr {
   border: none;

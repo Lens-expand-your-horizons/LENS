@@ -1,48 +1,57 @@
 <template>
   <div>
-    <label>{{ label }}</label>
-    <select v-model="selectedCountry">
-      <option v-for="country in countries" :key="country.value" :value="country.value">
-        {{ country.label }}
-      </option>
-    </select>
+    <label for="countries"></label>
+    <input
+      type="text"
+      list="countryList"
+      v-model="selectedCountry"
+      id="countries"
+      class="custom-select"
+      placeholder="調べたい国を選択してください"
+    />
+    <datalist id="countryList">
+      <option v-for="country in countries" :key="country.value" :value="country.label"></option>
+    </datalist>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      selectedCountry: null,
-      countries: [
-        { value: 'japan', label: '日本' },
-        { value: 'usa', label: 'アメリカ' }
-      ]
-    };
-  },
-  props: {
-    label: String
-  }
-};
+<script setup>
+import { ref } from 'vue';
+
+const selectedCountry = ref(null);
+
+const countries = [
+  { value: 'japan', label: 'Japan' },
+  { value: 'usa', label: 'USA' }
+  // 他の国のデータも追加することができます
+  ];
 </script>
 
 <style>
-/* スタイルを追加 */
-.select-container {
-  margin-bottom: 1rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.select-box {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
+/* セレクトボックスのスタイル */
+.custom-select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 300px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z" fill="none" stroke="#000"/></svg>');
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+  background-color: #fff;
+  background-size: 16px;
+}
+
+/* ホバー時のスタイル */
+.custom-select:hover {
+  border-color: #555;
+}
+
+/* アクティブ時のスタイル */
+.custom-select:focus {
+  outline: none;
+  border-color: dodgerblue;
 }
 </style>
