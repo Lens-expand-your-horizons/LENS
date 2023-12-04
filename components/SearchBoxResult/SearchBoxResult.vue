@@ -32,7 +32,7 @@ const executeSearch = () => {
 
 /* 他のスタイルはそのまま保持 */
 .q {
-    color: #111; // テキストの色を白に設定 
+    color: #111; // テキストの色を白に設定
     flex: 1;
     font-size: 1.5rem; // 文字サイズを小さく調整
     padding: 0 1rem;
