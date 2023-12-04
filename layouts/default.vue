@@ -8,7 +8,6 @@ const { $pwa } = useNuxtApp()
 <template lang="pug">
 main
     slot
-    footer Built Date: {{ date }}
     ClientOnly
         .pwa-toast(
             v-if="$pwa?.offlineReady || $pwa?.needRefresh"

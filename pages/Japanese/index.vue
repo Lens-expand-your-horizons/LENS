@@ -1,39 +1,40 @@
 <template lang="pug">
 div
-class="Sss"
 .page.flex-container
     .Header 
-      LensRow.flex-item
+      LensRow.flex-item.lensrow
       form(action="Japanese", method="get").page__container.flex-item.flex-container
         SearchBoxResult.flex-item
-      button.back-button(onclick='https://lens-s.com')
+      nuxt-link.back-button(to='/')
         | Home
     .Contents
       .result
-        .column(v-for="c in columns" :key="c.searchEngine")
-          h2 {{c.searchEngine}}
-          div
-            div(v-for="row in c.result" :key="row.id")
-              h3 {{ row.name }}
-              div {{ row.detail }}
+        div(v-for="r in result" :key="r.id")
+            h3 {{ r.name }}
+            div {{ r.detail }}
 </template>
 
 <script setup lang="ts">
-const columns = [
+const result = [
     {
-        searchEngine: 'Google',
-        result: [
-            {
-                id: 1,
-                name: 'ニュースタイトル',
-                detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
-            },
-            {
-                id: 2,
-                name: 'ニュースタイトル',
-                detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
-            },
-        ]
+        id: 1,
+        name: 'ニュースタイトル',
+        detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
+    },
+    {
+        id: 2,
+        name: 'ニュースタイトル',
+        detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
+    },
+    {
+        id: 3,
+        name: '荒木達亘 死亡',
+        detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
+    },
+    {
+        id: 4,
+        name: '荒木達亘 三日後に生き返る',
+        detail: '日本語でほにゃらら日本語でほにゃらら日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ日本語でほにゃらら日本語ではにゃほれ'
     },
 ]
 </script>
@@ -46,7 +47,6 @@ body{
   background-color: #fff;
 }
 .flex-item{
-  align-self: start;
   position: relative;
   color: #111;
   z-index: 1; /* LensRowをその他の要素よりも上に配置 */
