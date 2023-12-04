@@ -17,42 +17,42 @@ div
                 h3 {{ row.name }}
                 div {{ row.detail }}
 </template>
-    
-    <script setup lang="ts">
-    const columns = [
-        {
-            searchEngine: 'Google',
-            result: [
-                {
-                    id: 1,
-                    name: 'result1',
-                    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-                },
-                {
-                    id: 2,
-                    name: 'result2',
-                    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-                },
-            ]
-        },
-        {
-            searchEngine: 'Bing',
-            result: [
-                {
-                    id: 1,
-                    name: 'result1',
-                    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-                },
-                {
-                    id: 2,
-                    name: 'result2',
-                    detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-                },
-            ]
-        }
-    ]
-    </script>
-    
+
+<script setup lang="ts">
+const columns = [
+    {
+        searchEngine: 'Google',
+        result: [
+            {
+                id: 1,
+                name: 'result1',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
+            },
+            {
+                id: 2,
+                name: 'result2',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
+            },
+        ],
+    },
+    {
+        searchEngine: 'Bing',
+        result: [
+            {
+                id: 1,
+                name: 'result1',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
+            },
+            {
+                id: 2,
+                name: 'result2',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
+            },
+        ],
+    },
+];
+</script>
+
     <style lang="scss">
     body{
     margin: 20px; /* bodyの外側の余白を指定する */
@@ -87,14 +87,14 @@ div
       line-height: 40px; /* ボタンの高さと同じにする */
       cursor: pointer; /* カーソルをポインターに変更 */
     }
-    
+
     /* 検索窓のスタイル */
-    
+
     form {
       margin-bottom: 20px;
       /* 他のスタイルを追加 */
     }
-    
+
     input[type="search"] {
       width: 300px;
       height: 40px;
@@ -104,37 +104,37 @@ div
       border: 1px solid #ccc;
       /* 他のスタイルを追加 */
     }
-    
+
     /* ボタンのスタイル（非表示のためのスタイルも含む） */
     input[type="submit"] {
       display: none;
       /* ボタンを非表示にする */
     }
-    
+
     label {
       display: block;
       /* 他のスタイルを追加 */
     }
-    
+
     /* フォームのスタイル */
     form {
       margin-bottom: 20px;
       /* 他のスタイルを追加 */
     }
-    
+
     /* 検索結果のスタイル */
     .result {
       display: flex;
       flex-direction: column;
       /* 他のスタイルを追加 */
     }
-    
+
     /* 検索結果の各列のスタイル */
     .column {
       margin-bottom: 20px;
       /* 他のスタイルを追加 */
     }
-    
+
     /* その他、必要なスタイルを追加 */
     /* ... */
     </style>

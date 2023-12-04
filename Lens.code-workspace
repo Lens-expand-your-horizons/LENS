@@ -1,48 +1,55 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		}
-	],
-	"settings": {
-		"files.eol": "\n",
-		"cSpell.words": [
-			"adipiscing",
-			"amet",
-			"consectetur",
-			"dbaeumer",
-			"dignissim",
-			"Dogpile",
-			"eamodio",
-			"elit",
-			"Gigablast",
-			"hollowtree",
-			"lectus",
-			"Lycos",
-			"mhutchie",
-			"nuxi",
-			"Nuxt",
-			"OIDC",
-			"opensearchdescription",
-			"Suspendisse",
-			"Teoma",
-			"tortor",
-			"ultricies",
-			"Vite",
-			"Wisenut"
-		],
-		"svg.preview.background": "transparent"
-	},
-	"extensions": {
-		"recommendations": [
-			"dbaeumer.vscode-eslint",
-			"figma.figma-vscode-extension",
-			"eamodio.gitlens",
-			"github.vscode-github-actions",
-			"vue.volar",
-			"hollowtree.vue-snippets",
-			"mhutchie.git-graph",
-			"streetsidesoftware.code-spell-checker"
-		]
-	}
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "files.eol": "\n",
+        "cSpell.words": [
+            "adipiscing",
+            "amet",
+            "consectetur",
+            "customsearch",
+            "dbaeumer",
+            "dignissim",
+            "Dogpile",
+            "eamodio",
+            "elit",
+            "Gigablast",
+            "hollowtree",
+            "lectus",
+            "Lycos",
+            "mhutchie",
+            "nuxi",
+            "Nuxt",
+            "nuxtjs",
+            "OIDC",
+            "opensearchdescription",
+            "pagemap",
+            "Suspendisse",
+            "Teoma",
+            "tortor",
+            "ultricies",
+            "vetur",
+            "Vite",
+            "Wisenut"
+        ],
+        "cSpell.diagnosticLevel": "Hint",
+        "svg.preview.background": "transparent",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "extensions": {
+        "recommendations": [
+            "dbaeumer.vscode-eslint",
+            "figma.figma-vscode-extension",
+            "eamodio.gitlens",
+            "github.vscode-github-actions",
+            "vue.volar",
+            "hollowtree.vue-snippets",
+            "mhutchie.git-graph",
+            "streetsidesoftware.code-spell-checker"
+        ]
+    }
 }
