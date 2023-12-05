@@ -44,7 +44,6 @@ body {
 }
 
 .flex-item {
-    align-self: start;
     position: relative;
     color: #111;
     z-index: 1;
