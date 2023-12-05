@@ -8,7 +8,6 @@ const { $pwa } = useNuxtApp();
 <template lang="pug">
 main
     slot
-    footer Built Date: {{ date }}
     ClientOnly
         .pwa-toast(
             v-if="$pwa?.offlineReady || $pwa?.needRefresh"
@@ -40,7 +39,9 @@ main
 <style lang="scss">
 $bg: #fff;
 
-*, *::before, *::after{
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;

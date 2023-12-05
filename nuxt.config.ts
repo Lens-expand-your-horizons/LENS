@@ -28,6 +28,11 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@vite-pwa/nuxt', '@nuxtjs/eslint-module'],
+    runtimeConfig: {
+        public: {
+            gcseApiKey: '',
+        },
+    },
     pwa: {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.ico'],

@@ -5,11 +5,22 @@ export default {
     title: 'components/SearchBox',
     component: SearchBox,
     argTypes: {
+        page: {
+            control: 'select',
+            options: ['home', 'search'],
+        },
     },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
-export const Default = {
+export const Home = {
     args: {
+        page: 'home',
+    },
+};
+
+export const Search = {
+    args: {
+        page: 'search',
     },
 };
