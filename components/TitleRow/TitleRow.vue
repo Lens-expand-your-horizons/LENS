@@ -12,8 +12,6 @@ hgroup.titleRow
     padding: 0;
     h1 {
         font-size: 3.3rem;
-        margin: 1;
-        padding: 3;
         font-family : cursive;
     }
 }
