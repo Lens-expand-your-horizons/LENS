@@ -21,12 +21,7 @@ img.fit(
 )
 </template>
 
-<style lang="scss">
-/* ここにCSSを記述します */
-.fit {
-    width: 100%;
-}
-
+<style scoped lang="scss">
 /* ページ全体の背景色を指定 */
 body {
     background-color: #fff;
@@ -82,5 +77,9 @@ form {
             align-items: center;
         }
     }
+}
+
+.fit {
+    width: 100%;
 }
 </style>
