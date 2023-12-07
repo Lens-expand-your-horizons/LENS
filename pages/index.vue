@@ -11,7 +11,7 @@ useSeoMeta({
 <template lang="pug">
 .page.flex-container
     TitleRow.flex-item.ka
-    form(action="Japanese", method="get").page__container.flex-item.flex-container
+    form(action="/search", method="get").page__container.flex-item.flex-container
         SearchBox.flex-item.sa
         hr
         //p 英文のWebサイトを日本語で検索・閲覧できます

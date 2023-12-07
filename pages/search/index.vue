@@ -23,7 +23,7 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + params)
 .page.flex-container
     .Header
         LensRow.flex-item
-        form(action="Japanese", method="get").page__container.flex-item.flex-container
+        form(action="/search", method="get").page__container.flex-item.flex-container
             SearchBox.flex-item(:page="Page.search")
         NuxtLink(to='/')
             | Home
