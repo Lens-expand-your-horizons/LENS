@@ -61,7 +61,8 @@ const options = {
         'InfoSpace',
         'Netscape',
         'AltaVistaUK',
-    ],}
+    ],
+};
 </script>
 
 <template lang="pug">
@@ -88,24 +89,24 @@ const options = {
                 legend.page__group-title Search Engine
                 CheckBoxRow(:array="options.searchEngine")
 
-                    
 </template>
-<style>
+
+<style lang="scss">
 .flex {
-    &-container{
+    &-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        &--row{
+        &--row {
             flex-direction: row;
         }
     }
-    &-item{
+
+    &-item {
         flex-shrink: 0;
         overflow: visible;
     }
 }
-
 </style>

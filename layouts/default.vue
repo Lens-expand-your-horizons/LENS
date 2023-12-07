@@ -1,8 +1,8 @@
 <script setup>
 // you don't need this: only for testing purposes
-const date = useAppConfig().buildDate
+const date = useAppConfig().buildDate;
 
-const { $pwa } = useNuxtApp()
+const { $pwa } = useNuxtApp();
 </script>
 
 <template lang="pug">
@@ -39,7 +39,9 @@ main
 <style lang="scss">
 $bg: #fff;
 
-*, *::before, *::after{
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;

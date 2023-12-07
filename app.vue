@@ -4,4 +4,3 @@ NuxtLayout
     NuxtLoadingIndicator
     NuxtPage
 </template>
-
