@@ -16,6 +16,7 @@ useSeoMeta({
         hr
         //p 英文のWebサイトを日本語で検索・閲覧できます
         SelectCountries.flex-item.ta
+        SelectLanguage.flex-item.na
 img.fit(
     src="/S__15761435.jpg"
 )
@@ -40,6 +41,9 @@ form {
     /* 他のスタイルを追加 */
     .ta {
         margin: 30px;
+    }
+    .na {
+        margin: 50px;
     }
 
     hr {

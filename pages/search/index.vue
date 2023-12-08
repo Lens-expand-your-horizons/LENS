@@ -30,6 +30,7 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + params)
     .Contents
         .result
             div(v-for="r in results" :key="r.cacheId")
+                img(src="r.pagemap.cse_thumbnail.src",)
                 h3(v-html="r.htmlTitle")
                 div(v-html="r.htmlSnippet")
 </template>
