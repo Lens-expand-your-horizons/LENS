@@ -31,6 +31,7 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + SearchParam
     .Contents
         .result
             div(v-for="r in results" :key="r.cacheId")
+                img(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
                 h3(v-html="r.htmlTitle")
                 div(v-html="r.htmlSnippet")
 </template>
