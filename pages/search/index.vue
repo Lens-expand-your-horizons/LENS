@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { Page } from '@/utils/types';
 import type { Result } from '@/utils/types';
+import { GTranslator } from '@/utils/gtrans';
 
 const query = useRoute().query.q as string;
+const translator = new GTranslator();
+
 
 let results: Result[];
 const SearchParams = new URLSearchParams({
@@ -87,3 +90,4 @@ button.back-button {
     // 他のスタイルを追加
 }
 </style>
+utils/gtrans/typesutils/gtrans/types

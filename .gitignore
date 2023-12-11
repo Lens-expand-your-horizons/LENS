@@ -24,3 +24,6 @@ logs
 
 /.vscode/
 !/.vscode/extensions.json
+
+# Python file
+*.py
