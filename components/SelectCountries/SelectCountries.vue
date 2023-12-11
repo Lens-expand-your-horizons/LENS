@@ -6,7 +6,7 @@ div
         name="country"
         list="countryList"
         v-model="selectedCountry"
-        placeholder="調べたい国を選択してください"
+        placeholder="調べたい国を選択"
     )
     datalist#countryList
         option(
@@ -35,7 +35,7 @@ const countries = [
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    width: 300px;
+    width: 250px;
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z" fill="none" stroke="#000"/></svg>');
     background-repeat: no-repeat;

@@ -47,6 +47,11 @@ $bg: #fff;
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .pwa-toast {
     position: fixed;
     right: 0;

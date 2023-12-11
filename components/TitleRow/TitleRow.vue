@@ -12,7 +12,7 @@ hgroup.titleRow
     padding: 0;
     h1 {
         font-size: 3.3rem;
-        font-family : Lexend Georgia, 'Times New Roman', Times, serif;
+        font-family: 'Lexend Georgia', Times, serif;
     }
 }
 </style>

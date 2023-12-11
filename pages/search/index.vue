@@ -30,24 +30,41 @@ await fetch(
         NuxtLink(to='/')
             | Home
     .Contents
-        .result
-            div(v-for="r in results" :key="r.cacheId")
+        .result(v-for="r in results" :key="r.cacheId")
+            a(:href="r.link")
                 hgroup
-                    img(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
-                    p.SiteName(v-html="r.displayLink")
-                    p.URL(v-html="r.displayLink")
+                    .SiteTitle
+                        img.favicon(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
+                        p.URL(v-html="r.displayLink")
                     h3.Title(v-html="r.htmlTitle")
                     p.nativeTitle(v-html="r.htmlTitle")
-                p.text(v-html="r.htmlSnippet")
+            p.text(v-html="r.htmlSnippet")
 
 </template>
 
 <style lang="scss">
+.SiteTitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.URL {
+    font-size: 14px;
+}
+
+.favicon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #3c4043; /* 外枠を追加 */
+    margin-right: 10px; /* アイコンとURLの間のマージンを追加 */
+}
 .Title {
     color: #4754cb;
 }
 .nativeTitle {
     color: #3c8fbe;
+    margin-left: 20px;
 }
 body {
     margin: 20px; // bodyの外側の余白を指定する
@@ -91,40 +108,19 @@ button.back-button {
     cursor: pointer;
 }
 
-.result {
-    width: 600px;
-    margin-left: 130px;
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    // 他のスタイルを追加
-}
-.result {
-    width: 800px; // 幅を調整
-    margin-left: 130px;
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    // 他のスタイルを追加
-}
+.Contents {
+    padding-top: 40px;
+    .result {
+        width: 800px; // 幅を調整
+        margin-left: 130px;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
 
-.result-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px; // 各結果間のマージンを調整
-}
-
-.result-content {
-    flex: 1; // タイトルとその他のコンテンツを横並びにする
-}
-
-.Title {
-    color: #4754cb;
-    text-decoration: underline; // Titleに下線を追加
-}
-
-.SiteName,
-.URL {
-    margin-bottom: 5px; // SiteNameとURL間のマージンを追加
+        .Title {
+            color: #4754cb;
+            text-decoration: underline; // Titleに下線を追加
+        }
+    }
 }
 </style>

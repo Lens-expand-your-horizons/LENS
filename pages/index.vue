@@ -1,36 +1,47 @@
 <script setup lang="ts">
 useSeoMeta({
     title: 'LENS: expand your horizons',
-    description: 'Meta search engine that allows you to search the web in different languages and different countries.',
+    description:
+        'Meta search engine that allows you to search the web in different languages and different countries.',
     ogTitle: 'LENS: expand your horizons',
-    ogDescription: 'Meta search engine that allows you to search the web in different languages and different countries.',
+    ogDescription:
+        'Meta search engine that allows you to search the web in different languages and different countries.',
     ogUrl: 'https://lens-s.com',
 });
 </script>
 
 <template lang="pug">
 .page.flex-container
-    TitleRow.flex-item.ka
+    TitleRow.flex-item.Title
     form(action="/search", method="get").page__container.flex-item.flex-container
-        SearchBox.flex-item.sa
+        SearchBox.flex-item
         hr
         //p 英文のWebサイトを日本語で検索・閲覧できます
-        SelectCountries.flex-item.ta
-        SelectLanguage.flex-item.na
+        .Select
+            SelectCountries.flex-item.Countries
+            SelectLanguage.flex-item.Language
 img.fit(
     src="/S__15761435.jpg"
 )
 </template>
 
 <style scoped lang="scss">
-/* ページ全体の背景色を指定 */
 body {
     background-color: #fff;
 }
 
 /* フォームのスタイル */
-.page.flex-container {
-    margin: 150px; // 他のスタイルを追加
+.flex-container {
+    justify-content: flex-start; // 要素を左寄せにする
+    padding-left: 20px; // 左側の余白を追加
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    margin-top: 150px;
 }
 
 form {
@@ -39,47 +50,15 @@ form {
     margin: 30px; // 他のスタイルを追加
 
     /* 他のスタイルを追加 */
-    .ta {
-        margin: 30px;
-    }
-    .na {
-        margin: 50px;
-    }
 
-    hr {
-        border: none;
-        border-bottom: 1px solid black; // 下線のスタイルを指定
-    }
-
-    p {
-        margin: 50px;
-        text-decoration: underline; // テキストの下線を追加
-        color: gray;
-    }
-
-    /* 検索結果のスタイル */
-    .result {
+    .Select {
         display: flex;
-        flex-direction: column; // 他のスタイルを追加
+        margin-top: 30px;
+        justify-content: center;
+        gap: 30px;
     }
-
-    /* 検索結果の各列のスタイル */
-    .column {
-        margin-bottom: 20px; // 他のスタイルを追加
-    }
-
-    /* その他、必要なスタイルを追加 */
-    /* ... */
-
-    .flex {
-        &-container {
-            justify-content: flex-start; // 要素を左寄せにする
-            padding-left: 20px; // 左側の余白を追加
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+    .Countries.Language {
+        margin: 30px;
     }
 }
 
