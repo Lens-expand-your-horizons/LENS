@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Page } from '@/components/types';
+import { Page } from '@/utils/types';
 
 const props = withDefaults(defineProps<{
     page: Page,
