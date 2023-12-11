@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { Page } from '@/components/types';
-import type { Result } from '@/components/types';
+import { Page } from '@/utils/types';
+import type { Result } from '@/utils/types';
+
+const query = useRoute().query.q as string;
 
 let results: Result[];
-const q = useRoute().query.q as string;
-const params = new URLSearchParams({
-    q,
+const SearchParams = new URLSearchParams({
+    q: query,
     key: useRuntimeConfig().public.gcseApiKey,
     cx: '018b4df2d1b814105',
 });
-await fetch('https://customsearch.googleapis.com/customsearch/v1?' + params)
+await fetch('https://customsearch.googleapis.com/customsearch/v1?' + SearchParams)
     .then(response => response.json())
     .then((data) => {
         results = data.items;

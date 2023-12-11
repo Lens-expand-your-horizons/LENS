@@ -9,7 +9,7 @@ module.exports = {
         // 'eslint:recommended',
         '@nuxtjs/eslint-config-typescript',
         // 'plugin:vue/vue3-recommended',
-        // 'prettier',
+        'prettier',
         // 'plugin:@typescript-eslint/recommended',
     ],
     rules: {
