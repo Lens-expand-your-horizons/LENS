@@ -10,13 +10,12 @@ const params = new URLSearchParams({
     cx: '018b4df2d1b814105',
 });
 await fetch('https://customsearch.googleapis.com/customsearch/v1?' + params)
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((data) => {
         results = data.items;
         console.log(results);
     })
-    .catch(error => console.error(error));
-
+    .catch((error) => console.error(error));
 </script>
 
 <template lang="pug">
@@ -30,12 +29,23 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + params)
     .Contents
         .result
             div(v-for="r in results" :key="r.cacheId")
-                img(src="r.pagemap.cse_thumbnail.src",)
-                h3(v-html="r.htmlTitle")
-                div(v-html="r.htmlSnippet")
+                hgroup
+                    img.Icon(:src="r.pagemap.cse_thumbnail ? r.pagemap.cse_thumbnail[0].src : './favicon.svg'",)
+                    p.SiteName(v-html="r.displayLink")
+                    p.URL(v-html="r.displayLink")
+                    h3.Title(v-html="r.htmlTitle")
+                    p.nativeTitle(v-html="r.htmlTitle")
+                p.text(v-html="r.htmlSnippet")
+
 </template>
 
 <style lang="scss">
+.Title {
+    color: #4754cb;
+}
+.nativeTitle {
+    color: #3c8fbe;
+}
 body {
     margin: 20px; // bodyの外側の余白を指定する
     padding: 50px 10px 50px 10px; // bodyの内側余白を指定する(上:右:下:左)
@@ -59,7 +69,7 @@ form {
     left: 0;
     width: 100%;
     height: 90px; // 高さを変更
-    background-color: #A7C2EA;
+    background-color: #a7c2ea;
     color: white;
     display: flex; // 子要素を横並びにするために追加
     gap: 30px;
@@ -85,5 +95,33 @@ button.back-button {
     display: flex;
     flex-direction: column;
     // 他のスタイルを追加
+}
+.result {
+    width: 800px; // 幅を調整
+    margin-left: 130px;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    // 他のスタイルを追加
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; // 各結果間のマージンを調整
+}
+
+.result-content {
+    flex: 1; // タイトルとその他のコンテンツを横並びにする
+}
+
+.Title {
+    color: #4754cb;
+    text-decoration: underline; // Titleに下線を追加
+}
+
+.SiteName,
+.URL {
+    margin-bottom: 5px; // SiteNameとURL間のマージンを追加
 }
 </style>
