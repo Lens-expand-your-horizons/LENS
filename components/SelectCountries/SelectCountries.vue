@@ -1,19 +1,23 @@
 <template lang="pug">
 div
     label(for="countries")
-    input#country.custom-select(
+    select#country.custom-select(
         type="text"
         name="country"
         list="countryList"
         v-model="selectedCountry"
         placeholder="調べたい国を選択"
     )
-    datalist#countryList
+        option.hide(
+            value="auto"
+            disabled
+            selected
+        )
         option(
             v-for="country in countries"
-            :key="country.value"
-            :value="country.label"
-        )
+            :value="country.value"
+            :label="country.label"
+        ) 
 </template>
 
 <script setup>
@@ -54,5 +58,9 @@ const countries = [
 .custom-select:focus {
     outline: none;
     border-color: dodgerblue;
+}
+
+.hide {
+    display: hidden;
 }
 </style>
