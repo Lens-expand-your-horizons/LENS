@@ -3,7 +3,7 @@ import { Page } from '@/utils/types';
 import type { Result } from '@/utils/types';
 
 const query = useRoute().query.q as string;
-let queryTranslated: string;
+let queryTranslated = '';
 let detectedLang: string;
 let results: Result[];
 
@@ -22,10 +22,8 @@ await fetch('https://api.lens-s.com/dev_v1', {
     .then((data) => {
         queryTranslated = data.translations[0].text;
         detectedLang = data.translations[0].detected_source_language;
-        console.log(queryTranslated);
         return data.translations[0].text;
-    })
-    .catch(error => console.error(error));
+    });
 
 await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSearchParams({
     q: queryTranslated,
@@ -35,9 +33,7 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSear
     .then(response => response.json())
     .then((data) => {
         results = data.items;
-        console.log(results);
-    })
-    .catch((error) => console.error(error));
+    });
 </script>
 
 <template lang="pug">
@@ -148,4 +144,5 @@ button.back-button {
             text-decoration: underline; // Titleに下線を追加
         }
     }
-}</style>
+}
+</style>
