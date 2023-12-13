@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { Page } from '@/utils/types';
-import type { Result } from '@/utils/types';
+import type { DeepLResult, GoogleResult } from '@/utils/types';
 
 const query = useRoute().query.q as string;
 let queryTranslated = '';
 let detectedLang: string;
-let results: Result[];
+let results: GoogleResult[];
+const resultsToBeTranslated: string[] = [];
 
 await fetch('https://api.lens-s.com/dev_v1', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        Authorization: `DeepL-Auth-Key ${
-            useRuntimeConfig().public.deeplApiKey
-        }`,
     },
     body: JSON.stringify({
         text: [query],
@@ -38,6 +36,31 @@ await fetch(
     .then((response) => response.json())
     .then((data) => {
         results = data.items;
+        results.forEach((r) => {
+            resultsToBeTranslated.push(r.title);
+            resultsToBeTranslated.push(r.snippet);
+        });
+    });
+
+await fetch('https://api.lens-s.com/dev_v1', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        text: resultsToBeTranslated,
+        target_lang: 'EN',
+    }),
+})
+    .then((response) => response.json())
+    .then((data: DeepLResult) => {
+        data.translations.forEach((t, i) => {
+            if (i % 2 === 0) {
+                results[i / 2].translatedTitle = t.text;
+            } else {
+                results[(i - 1) / 2].translatedSnippet = t.text;
+            }
+        });
     });
 </script>
 
@@ -55,9 +78,9 @@ await fetch(
                     .SiteTitle
                         img.favicon(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
                         p.URL(v-html="r.displayLink")
-                    h3.Title(v-html="r.htmlTitle")
+                    h3.Title(v-html="r.translatedTitle")
                     p.nativeTitle(v-html="r.htmlTitle")
-            p.text(v-html="r.htmlSnippet")
+            p.text(v-html="r.translatedSnippet")
 
 </template>
 
