@@ -9,6 +9,6 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    width: 100%;
 }
 </style>

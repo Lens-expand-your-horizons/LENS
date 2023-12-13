@@ -18,22 +18,25 @@ await fetch('https://api.lens-s.com/dev_v1', {
         target_lang: 'JA',
     }),
 })
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((data) => {
         queryTranslated = data.translations[0].text;
         detectedLang = data.translations[0].detected_source_language;
         return data.translations[0].text;
     });
 
-await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSearchParams({
-    q: queryTranslated,
-    key: useRuntimeConfig().public.gcseApiKey,
-    cx: '018b4df2d1b814105',
-}))
-    .then(response => response.json())
+await fetch(
+    'https://customsearch.googleapis.com/customsearch/v1?' +
+        new URLSearchParams({
+            q: queryTranslated,
+            key: useRuntimeConfig().public.gcseApiKey,
+            cx: '018b4df2d1b814105',
+        }),
+)
+    .then((response) => response.json())
     .then((data) => {
         results = data.items;
-        results.forEach(r => {
+        results.forEach((r) => {
             resultsToBeTranslated.push(r.title);
             resultsToBeTranslated.push(r.snippet);
         });
@@ -49,7 +52,7 @@ await fetch('https://api.lens-s.com/dev_v1', {
         target_lang: 'EN',
     }),
 })
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((data: DeepLResult) => {
         data.translations.forEach((t, i) => {
             if (i % 2 === 0) {
@@ -59,18 +62,22 @@ await fetch('https://api.lens-s.com/dev_v1', {
             }
         });
     });
-
 </script>
 
 <template lang="pug">
 .page.flex-container
     .Header
-        LensRow.flex-item
+        NuxtLink(to='/').flex-item.Home
+            TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
             SearchBox.flex-item(:page="Page.search", :text="query")
-        NuxtLink(to='/')
-            | Home
+        SelectCountries.flex-item.Countries
+        SelectLanguage.flex-item.Language
     .Contents
+        TranslateBox.flex-item.Box(
+            :origin="query"
+            :translate="queryTranslated"
+        )
         .result(v-for="r in results" :key="r.cacheId")
             a(:href="r.link")
                 hgroup
@@ -104,8 +111,9 @@ await fetch('https://api.lens-s.com/dev_v1', {
     /* アイコンとURLの間のマージンを追加 */
 }
 
-.Title {
-    color: #4754cb;
+.Home {
+    display: block;
+    width: 7rem;
 }
 
 .nativeTitle {
@@ -122,7 +130,6 @@ body {
 .flex-item {
     position: relative;
     color: #111;
-    z-index: 1; // LensRowをその他の要素よりも上に配置
 }
 
 form {
@@ -136,12 +143,12 @@ form {
     left: 0;
     width: 100%;
     height: 90px; // 高さを変更
-    background-color: #a7c2ea;
-    color: white;
+    background-color: #f1f1f1;
     display: flex; // 子要素を横並びにするために追加
     gap: 30px;
     padding: 25px; // 内側の余白を設定
-    z-index: 0; // 必要に応じてz-indexを調整
+    z-index: 1; // 必要に応じてz-indexを調整
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 button.back-button {
@@ -153,6 +160,12 @@ button.back-button {
     text-align: center; // 文字を中央揃え
     line-height: 40px; // ボタンの高さと同じにする
     cursor: pointer;
+}
+
+.Box {
+    display: block;
+    margin-left: 130px;
+    margin-top: 20px;
 }
 
 .Contents {

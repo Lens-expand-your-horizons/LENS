@@ -61,7 +61,11 @@ body {
 }
 
 .page {
-    margin-top: 90px;
+    margin-top: 40px;
+}
+
+.Title {
+    width: 30%;
 }
 
 form {
