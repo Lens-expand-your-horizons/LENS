@@ -3,14 +3,35 @@ import { Page } from '@/utils/types';
 import type { Result } from '@/utils/types';
 
 const query = useRoute().query.q as string;
-
+let queryTranslated: string;
+let detectedLang: string;
 let results: Result[];
-const SearchParams = new URLSearchParams({
-    q: query,
+
+await fetch('https://api.lens-s.com/dev_v1', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `DeepL-Auth-Key ${useRuntimeConfig().public.deeplApiKey}`,
+    },
+    body: JSON.stringify({
+        text: [query],
+        target_lang: 'JA',
+    }),
+})
+    .then(response => response.json())
+    .then((data) => {
+        queryTranslated = data.translations[0].text;
+        detectedLang = data.translations[0].detected_source_language;
+        console.log(queryTranslated);
+        return data.translations[0].text;
+    })
+    .catch(error => console.error(error));
+
+await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSearchParams({
+    q: queryTranslated,
     key: useRuntimeConfig().public.gcseApiKey,
     cx: '018b4df2d1b814105',
-});
-await fetch('https://customsearch.googleapis.com/customsearch/v1?' + SearchParams)
+}))
     .then(response => response.json())
     .then((data) => {
         results = data.items;
@@ -25,7 +46,7 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + SearchParam
     .Header
         LensRow.flex-item
         form(action="/search", method="get").page__container.flex-item.flex-container
-            SearchBox.flex-item(:page="Page.search")
+            SearchBox.flex-item(:page="Page.search", :text="queryTranslated")
         NuxtLink(to='/')
             | Home
     .Contents
