@@ -1,8 +1,15 @@
 <template lang="pug">
 a.twitter-follow-button(
-    href="https://twitter.com/twitter?ref_src=twsrc%5Etfw"
+    href="https://twitter.com/Lens_metasearch"
     data-show-count="false"
-) Follow @twitter
+) 
+    img(
+        src="/X.svg"
+    )
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.twitter-follow-button {
+    display: block;
+}
+</style>

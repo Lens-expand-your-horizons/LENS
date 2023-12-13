@@ -1,25 +1,21 @@
 <script setup lang="ts">
 import { Page } from '@/utils/types';
 import type { DeepLResult, GoogleResult } from '@/utils/types';
-import { fromOptions, toOptions } from '@/utils/consts';
 
 const query = useRoute().query.q as string;
-const from = useRoute().query.from as string ?? 'auto';
-const to = useRoute().query.to as string ?? 'JA';
 let queryTranslated = '';
-let detectedLang = '';
+let detectedLang: string;
 let results: GoogleResult[];
 const resultsToBeTranslated: string[] = [];
 
-await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
+await fetch('https://api.lens-s.com/dev_v1', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
         text: [query],
-        source_lang: from === 'auto' ? undefined : from,
-        target_lang: to,
+        target_lang: 'JA',
     }),
 })
     .then((response) => response.json())
@@ -30,7 +26,12 @@ await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
     });
 
 await fetch(
-    `https://api.lens-s.com/dev_v1/search/google?q=${queryTranslated}`,
+    'https://customsearch.googleapis.com/customsearch/v1?' +
+        new URLSearchParams({
+            q: queryTranslated,
+            key: useRuntimeConfig().public.gcseApiKey,
+            cx: '018b4df2d1b814105',
+        }),
 )
     .then((response) => response.json())
     .then((data) => {
@@ -41,14 +42,14 @@ await fetch(
         });
     });
 
-await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
+await fetch('https://api.lens-s.com/dev_v1', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
         text: resultsToBeTranslated,
-        target_lang: detectedLang,
+        target_lang: 'EN',
     }),
 })
     .then((response) => response.json())
@@ -70,16 +71,8 @@ await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
             TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
             SearchBox.flex-item(:page="Page.search", :text="query")
-        SelectRegion.flex-item.Countries(
-            name="from"
-            placeholder="入力した言語"
-            :options="fromOptions"
-        )
-        SelectRegion.flex-item.Language(
-            name="to"
-            placeholder="検索したい言語"
-            :options="toOptions"
-        )
+        SelectCountries.flex-item.Countries
+        SelectLanguage.flex-item.Language
     .Contents
         TranslateBox.flex-item.Box(
             :origin="query"
@@ -172,7 +165,7 @@ button.back-button {
 .Box {
     display: block;
     margin-left: 130px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .Contents {
