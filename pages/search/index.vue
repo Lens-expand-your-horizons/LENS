@@ -3,9 +3,10 @@ import { Page } from '@/utils/types';
 import type { Result } from '@/utils/types';
 import { GTranslator } from '@/utils/gtrans';
 
-const query = useRoute().query.q as string;
+let query = useRoute().query.q as string;
 const translator = new GTranslator();
-
+const queryTranslated = await translator.translate(query, 'ja');
+query = queryTranslated.text;
 
 let results: Result[];
 const SearchParams = new URLSearchParams({

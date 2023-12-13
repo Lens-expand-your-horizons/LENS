@@ -1,10 +1,17 @@
 import {
     DEFAULT_RAISE_EXCEPTION,
     DEFAULT_USER_AGENT,
+    LANGCODES,
     LANGUAGES,
+    SPECIAL_CASES,
 } from './consts';
 import { GTokenAcquirer } from './gtoken';
+import { Translated } from './models';
 import { RequestInitRubust, fetchOk, fetchRobust } from '@/utils/fetchRobust';
+
+export type TranslateResult<T> = T extends string
+    ? Promise<Translated>
+    : Promise<Translated>[];
 
 export class GTranslator {
     serviceUrls: string[];
@@ -44,7 +51,7 @@ export class GTranslator {
         dest: string,
         src: string,
         override: string,
-    ): Promise<[Response, any]> {
+    ): Promise<[any[], Response]> {
         const token = this.tokenAcquirer.do(text);
         const url = `https://${this._pick_service_url()}/translate_a/single`;
         const params = new URLSearchParams({
@@ -55,8 +62,8 @@ export class GTranslator {
             override,
         });
         const r = fetchOk(url + '?' + params, this.client);
-        const data = await r.then((r) => r.json());
-        return [await r, data];
+        const data: any[] = await r.then((r) => r.json());
+        return [data, await r];
     }
 
     private _parse_extra_data(data: any) {
@@ -85,12 +92,58 @@ export class GTranslator {
         return extra;
     }
 
-    translate(text: string, dest = 'en', src = 'auto', ...kwargs: any[]) {
+    private async _translate_single(
+        text: string,
+        dest: string,
+        src: string,
+        override: string,
+    ): Promise<Translated> {
+        const origin = text;
+        const [data, response] = await this._translate(
+            text,
+            dest,
+            src,
+            override,
+        );
+
+        const translated = data[0].map((x: any) => x[0] || '').join('');
+
+        const extraData = this._parse_extra_data(data);
+
+        src = data[2];
+
+        return new Translated(src, dest, origin, text, '');
+    }
+
+    translate<T extends string | string[]>(
+        text: T,
+        dest = 'en',
+        src = 'auto',
+        override = '',
+    ): T extends string ? Promise<Translated> : Promise<Translated>[] {
         dest = dest.toLowerCase().split('-')[0];
         src = src.toLowerCase().split('-')[0];
 
-        if (src !== 'auto' && not(src in LANGUAGES)) {
-            return text;
+        if (src !== 'auto' && !(src in LANGUAGES)) {
+            if (dest in SPECIAL_CASES) {
+                dest = SPECIAL_CASES[dest];
+            } else if (dest in LANGCODES) {
+                dest = LANGCODES[dest];
+            } else {
+                throw new Error(`Invalid destination language: ${dest}`);
+            }
         }
+
+        if (typeof text === 'string') {
+            return this._translate_single(
+                text,
+                dest,
+                src,
+                override,
+            ) as T extends string ? Promise<Translated> : never;
+        }
+
+        const result = text.map((t) => this.translate(t, dest, src, override));
+        return result as T extends string ? never : Promise<Translated>[];
     }
 }

@@ -202,11 +202,11 @@ export const DEFAULT_SERVICE_URLS = [
     'translate.google.ws',
 ];
 
-export const SPECIAL_CASES = {
+export const SPECIAL_CASES: { [key: string]: string } = {
     ee: 'et',
 };
 
-export const LANGUAGES = {
+export const LANGUAGES: { [key: string]: string } = {
     af: 'afrikaans',
     sq: 'albanian',
     am: 'amharic',
