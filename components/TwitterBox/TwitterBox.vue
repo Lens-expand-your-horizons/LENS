@@ -10,6 +10,6 @@ a.twitter-follow-button(
 
 <style lang="scss">
 .twitter-follow-button {
-    border-radius: 50px;
+    display: block;
 }
 </style>
