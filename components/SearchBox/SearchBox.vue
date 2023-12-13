@@ -41,7 +41,7 @@ const submit = (): void => {
     overflow: hidden;
     width: 530px; // 幅を調整
     height: 40px; // 高さを適切なサイズに調整
-    border: 1px solid #000; // 外枠の線を追加
+    border: 3px solid #f9c936; // 外枠の線を追加
     border-radius: 30px; // 楕円形にするための適切な値を設定
     box-shadow: 1px 1px 2px gray;
 

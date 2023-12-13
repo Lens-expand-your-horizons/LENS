@@ -8,11 +8,11 @@ div
         v-model="selectedCountry"
         placeholder="調べたい国を選択"
     )
-        option.hide(
+    option.hide(
             value="auto"
             disabled
             selected
-        )
+            )
         option(
             v-for="country in countries"
             :value="country.value"
