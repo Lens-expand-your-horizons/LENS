@@ -70,8 +70,14 @@ await fetch('https://api.lens-s.com/dev_v1', {
         NuxtLink(to='/').flex-item.Home
             TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
-            SearchBox.flex-item(:page="Page.search", :text="queryTranslated")
+            SearchBox.flex-item(:page="Page.search", :text="query")
+        SelectCountries.flex-item.Countries
+        SelectLanguage.flex-item.Language
     .Contents
+        TranslateBox.flex-item.Box(
+            :origin="query"
+            :translate="queryTranslated"
+        )
         .result(v-for="r in results" :key="r.cacheId")
             a(:href="r.link")
                 hgroup
@@ -124,7 +130,6 @@ body {
 .flex-item {
     position: relative;
     color: #111;
-    z-index: 1; // LensRowをその他の要素よりも上に配置
 }
 
 form {
@@ -142,7 +147,7 @@ form {
     display: flex; // 子要素を横並びにするために追加
     gap: 30px;
     padding: 25px; // 内側の余白を設定
-    z-index: 0; // 必要に応じてz-indexを調整
+    z-index: 1; // 必要に応じてz-indexを調整
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -155,6 +160,12 @@ button.back-button {
     text-align: center; // 文字を中央揃え
     line-height: 40px; // ボタンの高さと同じにする
     cursor: pointer;
+}
+
+.Box {
+    display: block;
+    margin-left: 130px;
+    margin-top: 20px;
 }
 
 .Contents {

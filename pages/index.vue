@@ -41,7 +41,7 @@ body {
 }
 
 .page {
-    margin-top: 90px;
+    margin-top: 40px;
 }
 
 .Title {
