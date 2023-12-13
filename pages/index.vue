@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { fromOptions, toOptions } from '@/utils/consts';
+
 useSeoMeta({
     title: 'LENS: expand your horizons',
     description:
@@ -8,18 +10,6 @@ useSeoMeta({
         'Meta search engine that allows you to search the web in different languages and different countries.',
     ogUrl: 'https://lens-s.com',
 });
-
-const fromOptions = [
-    { value: 'auto', label: '自動検出' },
-    { value: 'ja', label: '日本語' },
-    { value: 'en', label: '英語' },
-];
-
-const toOptions = [
-    { value: 'ja', label: '日本語' },
-    { value: 'en', label: '英語' },
-];
-
 </script>
 
 <template lang="pug">

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Page } from '@/utils/types';
 import type { DeepLResult, GoogleResult } from '@/utils/types';
+import { fromOptions, toOptions } from '@/utils/consts';
 
 const query = useRoute().query.q as string;
 let queryTranslated = '';
@@ -27,11 +28,11 @@ await fetch('https://api.lens-s.com/dev_v1', {
 
 await fetch(
     'https://customsearch.googleapis.com/customsearch/v1?' +
-        new URLSearchParams({
-            q: queryTranslated,
-            key: useRuntimeConfig().public.gcseApiKey,
-            cx: '018b4df2d1b814105',
-        }),
+    new URLSearchParams({
+        q: queryTranslated,
+        key: useRuntimeConfig().public.gcseApiKey,
+        cx: '018b4df2d1b814105',
+    }),
 )
     .then((response) => response.json())
     .then((data) => {
@@ -71,8 +72,16 @@ await fetch('https://api.lens-s.com/dev_v1', {
             TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
             SearchBox.flex-item(:page="Page.search", :text="query")
-        SelectCountries.flex-item.Countries
-        SelectLanguage.flex-item.Language
+        SelectRegion.flex-item.Countries(
+            name="from"
+            placeholder="入力した言語"
+            :options="fromOptions"
+        )
+        SelectRegion.flex-item.Language(
+            name="to"
+            placeholder="検索したい言語"
+            :options="toOptions"
+        )
     .Contents
         TranslateBox.flex-item.Box(
             :origin="query"
