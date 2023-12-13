@@ -44,6 +44,10 @@ body {
     margin-top: 90px;
 }
 
+.Title {
+    width: 30%;
+}
+
 form {
     justify-content: flex-start; // 要素を左寄せにする
     margin: 20px; // 他のスタイルを追加

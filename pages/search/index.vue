@@ -11,26 +11,31 @@ await fetch('https://api.lens-s.com/dev_v1', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `DeepL-Auth-Key ${useRuntimeConfig().public.deeplApiKey}`,
+        Authorization: `DeepL-Auth-Key ${
+            useRuntimeConfig().public.deeplApiKey
+        }`,
     },
     body: JSON.stringify({
         text: [query],
         target_lang: 'JA',
     }),
 })
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((data) => {
         queryTranslated = data.translations[0].text;
         detectedLang = data.translations[0].detected_source_language;
         return data.translations[0].text;
     });
 
-await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSearchParams({
-    q: queryTranslated,
-    key: useRuntimeConfig().public.gcseApiKey,
-    cx: '018b4df2d1b814105',
-}))
-    .then(response => response.json())
+await fetch(
+    'https://customsearch.googleapis.com/customsearch/v1?' +
+        new URLSearchParams({
+            q: queryTranslated,
+            key: useRuntimeConfig().public.gcseApiKey,
+            cx: '018b4df2d1b814105',
+        }),
+)
+    .then((response) => response.json())
     .then((data) => {
         results = data.items;
     });
@@ -39,11 +44,10 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSear
 <template lang="pug">
 .page.flex-container
     .Header
-        LensRow.flex-item
+        NuxtLink(to='/').flex-item.Home
+            TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
             SearchBox.flex-item(:page="Page.search", :text="queryTranslated")
-        NuxtLink(to='/')
-            | Home
     .Contents
         .result(v-for="r in results" :key="r.cacheId")
             a(:href="r.link")
@@ -78,8 +82,9 @@ await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSear
     /* アイコンとURLの間のマージンを追加 */
 }
 
-.Title {
-    color: #4754cb;
+.Home {
+    display: block;
+    width: 7rem;
 }
 
 .nativeTitle {
@@ -110,12 +115,12 @@ form {
     left: 0;
     width: 100%;
     height: 90px; // 高さを変更
-    background-color: #a7c2ea;
-    color: white;
+    background-color: #f1f1f1;
     display: flex; // 子要素を横並びにするために追加
     gap: 30px;
     padding: 25px; // 内側の余白を設定
     z-index: 0; // 必要に応じてz-indexを調整
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 button.back-button {
