@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { fromOptions, toOptions } from '@/utils/consts';
+
 useSeoMeta({
     title: 'LENS: expand your horizons',
     description:
@@ -18,8 +20,16 @@ useSeoMeta({
         hr
         //p 英文のWebサイトを日本語で検索・閲覧できます
         .Select
-            SelectCountries.flex-item.Countries
-            SelectLanguage.flex-item.Language
+            SelectRegion.flex-item.Countries(
+                name="from"
+                placeholder="入力した言語"
+                :options="fromOptions"
+            )
+            SelectRegion.flex-item.Language(
+                name="to"
+                placeholder="検索したい言語"
+                :options="toOptions"
+            )
     img.fit(
         src="/Earth.jpg"
 )
@@ -60,6 +70,7 @@ form {
         justify-content: center;
         gap: 30px;
     }
+
     .Countries.Language {
         margin: 30px;
     }

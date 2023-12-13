@@ -1,36 +1,39 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const selected = ref(null);
+
+const {
+    name = 'region',
+    placeholder = '',
+    options = [],
+} = defineProps<{
+    name: string,
+    placeholder: string,
+    options: { value: string, label: string }[],
+}>();
+
+</script>
+
 <template lang="pug">
 div
-    label(for="languages")
-    select#language.custom-select(
+    label(for="countries")
+    select#country.custom-select(
         type="text"
-        name="language"
-        list="languageList"
-        v-model="selectedLanguage"
-        placeholder="使う言語を選択"
+        :name="name"
+        v-model="selected"
     )
-    option.hide(
+        option.hide(
             value="auto"
             disabled
             selected
-        )
+        ) {{ placeholder }}
         option(
-            v-for="language in languages"
-            :value="language.value"
-            :label="language.label"
+            v-for="opt in options"
+            :value="opt.value"
+            :label="opt.label"
         ) 
 </template>
-
-<script setup>
-import { ref } from 'vue';
-
-const selectedLanguage = ref(null);
-
-const languages = [
-    { value: 'japan', label: 'Japan' },
-    { value: 'usa', label: 'USA' },
-    // 他の国のデータも追加することができます
-];
-</script>
 
 <style>
 /* セレクトボックスのスタイル */
