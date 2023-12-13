@@ -3,17 +3,36 @@ import { Page } from '@/utils/types';
 import type { Result } from '@/utils/types';
 
 const query = useRoute().query.q as string;
-
+let queryTranslated: string;
+let detectedLang: string;
 let results: Result[];
-const SearchParams = new URLSearchParams({
-    q: query,
+
+await fetch('https://api.lens-s.com/dev_v1', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `DeepL-Auth-Key ${useRuntimeConfig().public.deeplApiKey}`,
+    },
+    body: JSON.stringify({
+        text: [query],
+        target_lang: 'JA',
+    }),
+})
+    .then(response => response.json())
+    .then((data) => {
+        queryTranslated = data.translations[0].text;
+        detectedLang = data.translations[0].detected_source_language;
+        console.log(queryTranslated);
+        return data.translations[0].text;
+    })
+    .catch(error => console.error(error));
+
+await fetch('https://customsearch.googleapis.com/customsearch/v1?' + new URLSearchParams({
+    q: queryTranslated,
     key: useRuntimeConfig().public.gcseApiKey,
     cx: '018b4df2d1b814105',
-});
-await fetch(
-    'https://customsearch.googleapis.com/customsearch/v1?' + SearchParams,
-)
-    .then((response) => response.json())
+}))
+    .then(response => response.json())
     .then((data) => {
         results = data.items;
         console.log(results);
@@ -26,7 +45,7 @@ await fetch(
     .Header
         LensRow.flex-item
         form(action="/search", method="get").page__container.flex-item.flex-container
-            SearchBox.flex-item(:page="Page.search")
+            SearchBox.flex-item(:page="Page.search", :text="queryTranslated")
         NuxtLink(to='/')
             | Home
     .Contents
@@ -48,6 +67,7 @@ await fetch(
     align-items: center;
     margin-bottom: 10px;
 }
+
 .URL {
     font-size: 14px;
 }
@@ -56,16 +76,21 @@ await fetch(
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    border: 1px solid #3c4043; /* 外枠を追加 */
-    margin-right: 10px; /* アイコンとURLの間のマージンを追加 */
+    border: 1px solid #3c4043;
+    /* 外枠を追加 */
+    margin-right: 10px;
+    /* アイコンとURLの間のマージンを追加 */
 }
+
 .Title {
     color: #4754cb;
 }
+
 .nativeTitle {
     color: #3c8fbe;
     margin-left: 20px;
 }
+
 body {
     margin: 20px; // bodyの外側の余白を指定する
     padding: 50px 10px 50px 10px; // bodyの内側余白を指定する(上:右:下:左)
@@ -110,6 +135,7 @@ button.back-button {
 
 .Contents {
     padding-top: 40px;
+
     .result {
         width: 800px; // 幅を調整
         margin-left: 130px;
@@ -122,5 +148,4 @@ button.back-button {
             text-decoration: underline; // Titleに下線を追加
         }
     }
-}
-</style>
+}</style>
