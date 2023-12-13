@@ -1,19 +1,23 @@
 <template lang="pug">
 div
-    label(for="language")
-    input#language.custom-select(
+    label(for="languages")
+    select#language.custom-select(
         type="text"
         name="language"
         list="languageList"
         v-model="selectedLanguage"
         placeholder="使う言語を選択"
     )
-    datalist#languageList
-        option(
-            v-for="language in language"
-            :key="language.value"
-            :value="language.label"
+    option.hide(
+            value="auto"
+            disabled
+            selected
         )
+        option(
+            v-for="language in languages"
+            :value="language.value"
+            :label="language.label"
+        ) 
 </template>
 
 <script setup>
@@ -21,7 +25,7 @@ import { ref } from 'vue';
 
 const selectedLanguage = ref(null);
 
-const language = [
+const languages = [
     { value: 'japan', label: 'Japan' },
     { value: 'usa', label: 'USA' },
     // 他の国のデータも追加することができます

@@ -20,8 +20,8 @@ useSeoMeta({
         .Select
             SelectCountries.flex-item.Countries
             SelectLanguage.flex-item.Language
-img.fit(
-    src="/S__15761435.jpg"
+    img.fit(
+        src="/Earth.jpg"
 )
 </template>
 
@@ -41,13 +41,12 @@ body {
 }
 
 .page {
-    margin-top: 150px;
+    margin-top: 90px;
 }
 
 form {
     justify-content: flex-start; // 要素を左寄せにする
-    padding-left: 20px; // 左側の余白を追加
-    margin: 30px; // 他のスタイルを追加
+    margin: 20px; // 他のスタイルを追加
 
     /* 他のスタイルを追加 */
 
@@ -63,6 +62,8 @@ form {
 }
 
 .fit {
-    width: 100%;
+    margin-top: 5px;
+    width: 80%;
+    opacity: 0.3;
 }
 </style>
