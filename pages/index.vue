@@ -8,6 +8,18 @@ useSeoMeta({
         'Meta search engine that allows you to search the web in different languages and different countries.',
     ogUrl: 'https://lens-s.com',
 });
+
+const fromOptions = [
+    { value: 'auto', label: '自動検出' },
+    { value: 'ja', label: '日本語' },
+    { value: 'en', label: '英語' },
+];
+
+const toOptions = [
+    { value: 'ja', label: '日本語' },
+    { value: 'en', label: '英語' },
+];
+
 </script>
 
 <template lang="pug">
@@ -18,8 +30,16 @@ useSeoMeta({
         hr
         //p 英文のWebサイトを日本語で検索・閲覧できます
         .Select
-            SelectCountries.flex-item.Countries
-            SelectLanguage.flex-item.Language
+            SelectRegion.flex-item.Countries(
+                name="from"
+                placeholder="入力した言語"
+                :options="fromOptions"
+            )
+            SelectRegion.flex-item.Language(
+                name="to"
+                placeholder="検索したい言語"
+                :options="toOptions"
+            )
     img.fit(
         src="/Earth.jpg"
 )
@@ -56,6 +76,7 @@ form {
         justify-content: center;
         gap: 30px;
     }
+
     .Countries.Language {
         margin: 30px;
     }
