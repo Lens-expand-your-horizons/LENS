@@ -9,14 +9,16 @@ export enum CheckBoxSize {
     large = 'large',
 }
 
-export type Result = {
+export type GoogleResult = {
     kind: string;
     title: string;
     htmlTitle: string;
+    translatedTitle?: string;
     link: string;
     displayLink: string;
     snippet: string;
     htmlSnippet: string;
+    translatedSnippet?: string;
     cacheId: string;
     formattedUrl: string;
     htmlFormattedUrl: string;
@@ -39,4 +41,11 @@ export type Result = {
             label_with_op: string;
         },
     ];
+};
+
+export type DeepLResult = {
+    translations: {
+        detected_source_language: string;
+        text: string;
+    }[];
 };
