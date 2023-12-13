@@ -72,4 +72,11 @@ export default defineNuxtConfig({
             type: 'module',
         },
     },
+    vite: {
+        resolve: {
+            alias: {
+                '@': '/',
+            },
+        },
+    },
 });
