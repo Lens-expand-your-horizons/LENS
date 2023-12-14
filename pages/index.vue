@@ -15,8 +15,8 @@ useSeoMeta({
 <template lang="pug">
 .page.flex-container
     .Header 
-        TwitterBox.head-item.Twitter
-        QuestionBox.head-item.Question
+        //TwitterBox.head-item
+        //QuestionBox.head-item
     TitleRow.flex-item.Title
     form(action="/search", method="get").page__container.flex-item.flex-container
         SearchBox.flex-item
@@ -53,14 +53,9 @@ body {
     align-items: center;
 }
 
-.Twitter {
+.head-item {
     width: 2rem;
 }
-
-.Question {
-    width: 10rem;
-}
-
 .page {
     margin-top: 40px;
 }
