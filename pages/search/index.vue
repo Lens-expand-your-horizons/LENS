@@ -65,7 +65,7 @@ await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
 
 <template lang="pug">
 .page.flex-container
-    .Header
+    form(action="/search", method="get").Header
         NuxtLink(to='/').flex-item.Home
             TitleRow
         form(action="/search", method="get").page__container.flex-item.flex-container
