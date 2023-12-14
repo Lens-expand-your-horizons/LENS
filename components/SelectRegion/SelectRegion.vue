@@ -19,7 +19,6 @@ const {
 div
     label(for="countries")
     select#country.custom-select(
-        type="text"
         :name="name"
         v-model="selected"
     )

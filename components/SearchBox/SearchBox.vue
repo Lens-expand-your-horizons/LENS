@@ -3,8 +3,8 @@ import { Page } from '@/utils/types';
 
 const props = withDefaults(
     defineProps<{
-        page: Page;
-        text: string;
+        page?: Page;
+        text?: string;
     }>(),
     {
         page: Page.home,
