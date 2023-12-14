@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const selected = ref(null);
+const selected = ref('auto');
 
 const {
     name = 'region',
@@ -23,10 +23,9 @@ div
         :name="name"
         v-model="selected"
     )
-        option.hide(
+        option(
             value="auto"
             disabled
-            selected
         ) {{ placeholder }}
         option(
             v-for="opt in options"
