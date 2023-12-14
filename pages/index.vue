@@ -30,7 +30,7 @@ useSeoMeta({
             )
             SelectRegion.flex-item.Language(
                 name="to"
-                placeholder="検索したい言語"
+                placeholder="検索する言語"
                 :options="toOptions"
             )
     img.fit(
@@ -56,6 +56,7 @@ body {
 .head-item {
     width: 2rem;
 }
+
 .page {
     margin-top: 40px;
 }

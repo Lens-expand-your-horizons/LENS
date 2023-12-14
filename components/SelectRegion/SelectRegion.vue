@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const selected = ref('auto');
-
 const {
     name = 'region',
     placeholder = '',
+    defaultSelected = '',
     options = [],
 } = defineProps<{
     name: string,
     placeholder: string,
+    defaultSelected?: string,
     options: { value: string, label: string }[],
 }>();
+
+const selected = ref(defaultSelected);
 
 </script>
 
@@ -23,13 +25,14 @@ div
         v-model="selected"
     )
         option(
-            value="auto"
+            value=""
             disabled
         ) {{ placeholder }}
         option(
             v-for="opt in options"
             :value="opt.value"
             :label="opt.label"
+            :selected="opt.value === defaultSelected"
         ) 
 </template>
 

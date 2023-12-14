@@ -6,12 +6,13 @@ import { fromOptions, toOptions } from '@/utils/consts';
 const query = useRoute().query.q as string;
 const from = useRoute().query.from as string ?? 'auto';
 const to = useRoute().query.to as string ?? 'JA';
+const translator = useRoute().query.translator as string ?? 'google';
 let queryTranslated = '';
 let detectedLang = '';
 let results: GoogleResult[];
 const resultsToBeTranslated: string[] = [];
 
-await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
+await fetch(`https://api.lens-s.com/dev_v1/translate/${translator}`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ await fetch(
         });
     });
 
-await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
+await fetch(`https://api.lens-s.com/dev_v1/translate/${translator}`, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
@@ -73,11 +74,13 @@ await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
         SelectRegion.flex-item.Countries(
             name="from"
             placeholder="入力した言語"
+            :default-selected="from"
             :options="fromOptions"
         )
         SelectRegion.flex-item.Language(
             name="to"
-            placeholder="検索したい言語"
+            placeholder="検索する言語"
+            :default-selected="to"
             :options="toOptions"
         )
     .Contents
@@ -90,7 +93,7 @@ await fetch('https://api.lens-s.com/dev_v1/translate/deepl', {
                 hgroup
                     .SiteTitle
                         img.favicon(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
-                        p.URL(v-html="r.displayLink")
+                        p.URL(v-html="`https://translate.google.com/translate?sl=${from}&tl=${to}&u=${r.displayLink}`")
                     h3.Title(v-html="r.translatedTitle")
                     p.nativeTitle(v-html="r.htmlTitle")
             p.text(v-html="r.translatedSnippet")
