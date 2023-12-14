@@ -1,18 +1,14 @@
 <template lang="pug">
-hgroup.titleRow
-    h1 LENS
+img(
+    src="/Logo.jpg"
+)
 </template>
 
 <style lang="scss">
-.titleRow {
+img {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
-    h1 {
-        font-size: 3.3rem;
-        font-family : cursive;
-    }
+    width: 100%;
 }
 </style>

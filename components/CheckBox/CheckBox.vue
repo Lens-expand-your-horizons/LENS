@@ -28,7 +28,7 @@ const emits = defineEmits(['click']);
     display: flex;
     align-items: center;
     font-size: 1rem;
-    label {  
+    label {
         display: block;
         padding: .5rem;
         border-radius: 1.2rem;
