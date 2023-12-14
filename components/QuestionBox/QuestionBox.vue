@@ -1,12 +1,10 @@
 <template lang="pug">
 a.questionnaire-button(
-        href="https://forms.gle/XvRS2BkAWCGhTaor9"
-        data-show-count="false"
-    ) 
-        .button 
-            img(
-                src="/Question.svg"
-            ) 
+    href="https://forms.gle/XvRS2BkAWCGhTaor9"
+    data-show-count="false"
+)
+    .button 
+        img(src="/Question.svg")
 </template>
 
 <style lang="scss">
