@@ -7,6 +7,7 @@ export const fromOptions = [
     { value: 'es', label: 'スペイン語' },
     { value: 'fr', label: 'フランス語' },
     { value: 'de', label: 'ドイツ語' },
+    { value: 'pt', label: 'ポルトガル語' },
 ];
 
 export const toOptions = [
@@ -17,4 +18,5 @@ export const toOptions = [
     { value: 'es', label: 'スペイン語' },
     { value: 'fr', label: 'フランス語' },
     { value: 'de', label: 'ドイツ語' },
+    { value: 'pt', label: 'ポルトガル語' },
 ];
