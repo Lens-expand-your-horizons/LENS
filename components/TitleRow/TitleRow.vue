@@ -1,6 +1,6 @@
 <template lang="pug">
 img(
-    src="/Logo.jpg"
+    src="/logo.png"
 )
 </template>
 

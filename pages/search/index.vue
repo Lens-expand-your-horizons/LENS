@@ -7,93 +7,128 @@ const query = useRoute().query.q as string;
 const from = useRoute().query.from as string ?? 'auto';
 const to = useRoute().query.to as string ?? 'JA';
 const translator = useRoute().query.translator as string ?? 'google';
-let queryTranslated = '';
-let detectedLang = '';
-let results: GoogleResult[];
+
+const results: Ref<GoogleResult[]> = ref([]);
+const queryTranslated = ref('');
+const detectedLang = ref('');
 const resultsToBeTranslated: string[] = [];
 
-await fetch(`https://api.lens-s.com/dev_v1/translate/${translator}`, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        text: [query],
-        source_lang: from === 'auto' ? undefined : from,
-        target_lang: to,
-    }),
-})
-    .then((response) => response.json())
-    .then((data) => {
-        queryTranslated = data.translations[0].text;
-        detectedLang = data.translations[0].detected_source_language;
-        return data.translations[0].text;
-    });
+const translate = async () => {
+    return await useFetch(`/translate/${translator}`, {
+        server: false,
+        lazy: true,
+        baseURL: 'https://api.lens-s.com/dev_v1',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: {
+            text: [query],
+            source_lang: from === 'auto' ? undefined : from,
+            target_lang: to,
+        },
+        onResponse({ request, response, options }) {
+            const data = response._data as DeepLResult;
+            queryTranslated.value = data.translations[0].text;
+            detectedLang.value = data.translations[0].detected_source_language;
+            search();
+        },
+    }) as {
+        data: Ref<DeepLResult>,
+        pending: Ref<boolean>,
+    };
+};
 
-await fetch(
-    `https://api.lens-s.com/dev_v1/search/google?q=${queryTranslated}`,
-)
-    .then((response) => response.json())
-    .then((data) => {
-        results = data.items;
-        results.forEach((r) => {
-            resultsToBeTranslated.push(r.title);
-            resultsToBeTranslated.push(r.snippet);
-        });
-    });
+const search = async () => {
+    return await useFetch('/search/google', {
+        server: false,
+        lazy: true,
+        baseURL: 'https://api.lens-s.com/dev_v1',
+        query: {
+            q: queryTranslated.value,
+        },
+        onResponse({ request, response, options }) {
+            const data = response._data as {
+                items: GoogleResult[],
+            };
+            results.value = data.items;
+            results.value.forEach((r) => {
+                resultsToBeTranslated.push(r.title);
+                resultsToBeTranslated.push(r.snippet);
+                backTranslate();
+            });
+        },
+    }) as {
+        data: Ref<{
+            items: GoogleResult[],
+        }>,
+        pending: Ref<boolean>,
+    };
+};
 
-await fetch(`https://api.lens-s.com/dev_v1/translate/${translator}`, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        text: resultsToBeTranslated,
-        target_lang: detectedLang,
-    }),
-})
-    .then((response) => response.json())
-    .then((data: DeepLResult) => {
-        data.translations.forEach((t, i) => {
-            if (i % 2 === 0) {
-                results[i / 2].translatedTitle = t.text;
-            } else {
-                results[(i - 1) / 2].translatedSnippet = t.text;
-            }
-        });
-    });
+const backTranslate = async () => {
+    return await useFetch(`/translate/${translator}`, {
+        server: false,
+        lazy: true,
+        baseURL: 'https://api.lens-s.com/dev_v1',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: {
+            text: resultsToBeTranslated,
+            target_lang: detectedLang.value,
+        },
+        onResponse({ request, response, options }) {
+            const data = response._data as DeepLResult;
+            data.translations.forEach((t, i) => {
+                if (i % 2 === 0) {
+                    results.value[i / 2].translatedTitle = t.text;
+                } else {
+                    results.value[(i - 1) / 2].translatedSnippet = t.text;
+                }
+            });
+        },
+    }) as {
+        data: Ref<DeepLResult>,
+        pending: Ref<boolean>,
+    };
+};
+
+translate();
+
 </script>
 
 <template lang="pug">
-.page.flex-container
-    form(action="/search", method="get").Header
-        NuxtLink(to='/').flex-item.Home
+.page
+    form(action="/search", method="get").Header.flex-container
+        NuxtLink(to='/').flex-item.Logo
             TitleRow
-        form(action="/search", method="get").page__container.flex-item.flex-container
-            SearchBox.flex-item(:page="Page.search", :text="query")
-        SelectRegion.flex-item.Countries(
-            name="from"
-            placeholder="入力した言語"
-            :default-selected="from"
-            :options="fromOptions"
-        )
-        SelectRegion.flex-item.Language(
-            name="to"
-            placeholder="検索する言語"
-            :default-selected="to"
-            :options="toOptions"
-        )
-    .Contents
-        TranslateBox.flex-item.Box(
+        SearchBox.flex-item(:page="Page.search", :model-value="query")
+        .flex-item.flex-container.selects
+            SelectRegion.flex-item(
+                name="from"
+                placeholder="入力した言語"
+                :model-value="detectedLang"
+                :options="fromOptions"
+            )
+            SelectRegion.flex-item(
+                name="to"
+                placeholder="検索する言語"
+                :model-value="to"
+                :options="toOptions"
+            )
+    .Contents(fallback-tag="div" fallback="Loading...")
+        TranslateBox.TranslateBox(
             :origin="query"
             :translate="queryTranslated"
         )
         .result(v-for="r in results" :key="r.cacheId")
-            a(:href="r.link")
+            a(:href="`https://translate.google.com/translate?sl=${to}&tl=${detectedLang}&u=${r.link}`")
                 hgroup
                     .SiteTitle
                         img.favicon(:src="`https://www.google.com/s2/favicons?domain=${r.displayLink}&sz=128`")
-                        p.URL(v-html="`https://translate.google.com/translate?sl=${from}&tl=${to}&u=${r.displayLink}`")
+                        p.URL(v-html="r.displayLink")
                     h3.Title(v-html="r.translatedTitle")
                     p.nativeTitle(v-html="r.htmlTitle")
             p.text(v-html="r.translatedSnippet")
@@ -101,50 +136,18 @@ await fetch(`https://api.lens-s.com/dev_v1/translate/${translator}`, {
 </template>
 
 <style lang="scss">
-.SiteTitle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
+.flex {
+    &-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem
+    }
 
-.URL {
-    font-size: 14px;
-}
-
-.favicon {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1px solid #3c4043;
-    /* 外枠を追加 */
-    margin-right: 10px;
-    /* アイコンとURLの間のマージンを追加 */
-}
-
-.Home {
-    display: block;
-    width: 7rem;
-}
-
-.nativeTitle {
-    color: #3c8fbe;
-    margin-left: 20px;
-}
-
-body {
-    margin: 20px; // bodyの外側の余白を指定する
-    padding: 50px 10px 50px 10px; // bodyの内側余白を指定する(上:右:下:左)
-    background-color: #fff;
-}
-
-.flex-item {
-    position: relative;
-    color: #111;
-}
-
-form {
-    position: relative;
-    z-index: 1; // LensRowをその他の要素よりも上に配置
+    &-item {
+        width: 100%;
+    }
 }
 
 .Header {
@@ -152,45 +155,108 @@ form {
     top: 0;
     left: 0;
     width: 100%;
-    height: 90px; // 高さを変更
+    height: 7rem; // 高さを変更
     background-color: #f1f1f1;
-    display: flex; // 子要素を横並びにするために追加
-    gap: 30px;
-    padding: 25px; // 内側の余白を設定
+    padding: 1rem; // 内側の余白を設定
     z-index: 1; // 必要に応じてz-indexを調整
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
-}
+    justify-content: start;
 
-button.back-button {
-    width: 100px;
-    height: 40px;
-    border-radius: 50px; // 楕円形にするための設定
-    background-color: #fff; // 青色の背景
-    color: #111; // 文字色
-    text-align: center; // 文字を中央揃え
-    line-height: 40px; // ボタンの高さと同じにする
-    cursor: pointer;
-}
+    .Logo {
+        flex: 0 0 8rem;
+    }
 
-.Box {
-    display: block;
-    margin-left: 130px;
-    margin-top: 20px;
+    .selects {
+        justify-content: start;
+    }
+
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+
+        .Logo {
+            width: 10rem;
+            flex: 0 0 3rem;
+        }
+
+        .selects {
+            justify-content: center;
+        }
+    }
+
+    @media screen and (max-width: 35rem) {
+        .Logo {
+            width: 6rem;
+            flex: 0 0 2rem;
+        }
+
+        .SearchBox {
+            height: 2.5rem;
+        }
+
+        .SelectRegion {
+            height: 2.5rem;
+        }
+
+        .selects {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
 }
 
 .Contents {
-    padding-top: 40px;
+    padding-top: 10rem;
+    width: 40rem; // 幅を調整
+    margin-left: 10rem;
+    justify-items: left;
+
+    @media screen and (max-width: 1200px) {
+        padding-top: 15rem;
+        width: 90%;
+        margin: 0 auto 0;
+    }
+
+    @media screen and (max-width: 35rem) {
+        padding-top: 16rem;
+    }
+
+    .TranslateBox {
+        display: block;
+    }
 
     .result {
-        width: 800px; // 幅を調整
-        margin-left: 130px;
         margin-top: 30px;
         display: flex;
         flex-direction: column;
 
+        .SiteTitle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .favicon {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                border: 1px solid #3c4043;
+                margin-right: 10px;
+            }
+
+            .URL {
+                font-size: 14px;
+            }
+        }
+
         .Title {
             color: #4754cb;
             text-decoration: underline; // Titleに下線を追加
+        }
+
+        .nativeTitle {
+            color: #3c8fbe;
+            margin-left: 3rem;
         }
     }
 }

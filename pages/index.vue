@@ -10,47 +10,71 @@ useSeoMeta({
         'Meta search engine that allows you to search the web in different languages and different countries.',
     ogUrl: 'https://lens-s.com',
 });
+
+const query = ref('');
+const from = ref('');
+const to = ref('');
+const translator = 'google';
+
+const submit = (e: Event) => {
+    e.preventDefault();
+    if (!query.value || !to.value) {
+        return;
+    }
+    if (!from.value) {
+        from.value = 'auto';
+    }
+    navigateTo({
+        path: '/search',
+        query: {
+            q: query.value,
+            from: from.value,
+            to: to.value,
+            translator,
+        },
+    });
+};
 </script>
 
 <template lang="pug">
 .page.flex-container
-    .Header 
-        //TwitterBox.head-item
-        //QuestionBox.head-item
-    TitleRow.flex-item.Title
-    form(action="/search", method="get").page__container.flex-item.flex-container
-        SearchBox.flex-item
-        hr
+    //.Header 
+    //  TwitterBox.head-item
+    //  QuestionBox.head-item
+    form(@submit="submit").form.flex-item.flex-container
+        TitleRow.flex-item.Title
+        SearchBox.flex-item(v-model="query")
         //p 英文のWebサイトを日本語で検索・閲覧できます
-        .Select
-            SelectRegion.flex-item.Countries(
+        .Select.flex-item.flex-container
+            SelectRegion.flex-item(
                 name="from"
                 placeholder="入力した言語"
                 :options="fromOptions"
+                v-model="from"
             )
-            SelectRegion.flex-item.Language(
+            SelectRegion.flex-item(
                 name="to"
                 placeholder="検索する言語"
                 :options="toOptions"
+                v-model="to"
             )
-    img.fit(
-        src="/Earth.jpg"
-)
+    img.fit(src="/Earth.jpg" alt="Earth illust")
 </template>
 
 <style scoped lang="scss">
 body {
     background-color: #fff;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* フォームのスタイル */
 .flex-container {
-    justify-content: flex-start; // 要素を左寄せにする
-    padding-left: 20px; // 左側の余白を追加
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem
 }
 
 .head-item {
@@ -58,34 +82,38 @@ body {
 }
 
 .page {
-    margin-top: 40px;
+    width: 90%;
+    margin: 0 auto 0;
+    height: 100vh;
+    gap: 5%;
+
+    @media screen and (min-width: 40rem) {
+        width: 80%;
+    }
 }
 
 .Title {
-    width: 30%;
+    width: 60%;
 }
 
-form {
-    justify-content: flex-start; // 要素を左寄せにする
-    margin: 20px; // 他のスタイルを追加
-
-    /* 他のスタイルを追加 */
+.form {
+    width: 100%;
+    max-width: 35rem;
 
     .Select {
-        display: flex;
-        margin-top: 30px;
-        justify-content: center;
-        gap: 30px;
-    }
+        justify-content: space-between;
+        width: 100%;
+        gap: 1rem;
 
-    .Countries.Language {
-        margin: 30px;
+        @media screen and (min-width: 40rem) {
+            flex-direction: row;
+            gap: 2rem;
+        }
     }
 }
 
 .fit {
-    margin-top: 5px;
-    width: 80%;
+    width: 100%;
     opacity: 0.3;
 }
 </style>
