@@ -29,7 +29,7 @@ main
             role="alert"
         )
             .message
-                span Install PWA
+                span Install app?
             button(@click="$pwa.install()")
                 | Install
             button(@click="$pwa.cancelInstall()")

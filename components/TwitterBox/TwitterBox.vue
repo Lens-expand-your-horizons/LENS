@@ -4,7 +4,7 @@ a.twitter-follow-button(
     data-show-count="false"
 ) 
     img(
-        src="/X.svg"
+        src="/images/X.svg"
     )
 </template>
 

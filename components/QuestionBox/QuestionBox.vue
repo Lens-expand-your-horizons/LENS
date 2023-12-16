@@ -4,13 +4,13 @@ a.questionnaire-button(
     data-show-count="false"
 )
     .button 
-        img(src="/Question.svg")
+        img(src="/images/Question.svg")
 </template>
 
 <style lang="scss">
 .button {
-    border: 2px solid #f9c936; /* 外枠を追加 */
-    padding: 4px; /* 内側の余白を設定 */
+    border: 2px solid #f9c936;
+    padding: 4px;
     border-radius: 50px;
 }
 </style>

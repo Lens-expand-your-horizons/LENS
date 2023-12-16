@@ -1,7 +1,5 @@
 <template lang="pug">
-img(
-    src="/logo.png"
-)
+img(src="/images/logo.png" alt="owl logo")
 </template>
 
 <style lang="scss">
