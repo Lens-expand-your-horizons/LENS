@@ -3,18 +3,18 @@ import { Page } from '@/utils/types';
 import type { DeepLResult, GoogleResult } from '@/utils/types';
 import { fromOptions, toOptions } from '@/utils/consts';
 
-const query = ref(useRoute().query.q as string);
-const from = ref(useRoute().query.from as string ?? 'auto');
-const to = ref(useRoute().query.to as string ?? 'JA');
-const translator = ref(useRoute().query.translator as string ?? 'google');
-const queryOrigin = ref(query.value);
+const query = useRoute().query.q as string;
+const from = useRoute().query.from as string ?? 'auto';
+const to = useRoute().query.to as string ?? 'JA';
+const translator = useRoute().query.translator as string ?? 'google';
+const queryOrigin = ref(query);
 
 const results: Ref<GoogleResult[]> = ref([]);
 const queryTranslated = ref('');
 const detectedLang = ref('');
-const resultsToBeTranslated: string[] = [];
 
-const translate = async () => {
+const translate = async (q: string, f: string, t: string, translator: string, retry: boolean = true) => {
+    console.log('translate called with', q, f, t, translator, retry);
     return await useFetch(`/translate/${translator}`, {
         server: false,
         lazy: true,
@@ -24,15 +24,33 @@ const translate = async () => {
             'Content-Type': 'application/json',
         },
         body: {
-            text: [query.value],
-            source_lang: from.value === 'auto' ? undefined : from.value,
-            target_lang: to.value,
+            text: [q],
+            source_lang: from === 'auto' ? undefined : from,
+            target_lang: to,
         },
         onResponse({ request, response, options }) {
+            if ('errorMessage' in response._data) {
+                if (response._data.errorMessage === 'invalid destination language') {
+                    if (translator === 'google' && retry) {
+                        console.log('retrying with deepl');
+                        translate(q, f, t, 'deepl', false);
+                    } else if (translator === 'deepl' && retry) {
+                        console.log('retrying with google');
+                        translate(q, f, t, 'google', false);
+                    } else {
+                        queryTranslated.value = 'Failed to translate';
+                    }
+                } else {
+                    queryTranslated.value = 'Failed to translate';
+                }
+                return;
+            }
             const data = response._data as DeepLResult;
-            queryTranslated.value = data.translations[0].text;
-            detectedLang.value = data.translations[0].detected_source_language;
-            search();
+            q = data.translations[0].text;
+            f = data.translations[0].detected_source_language;
+            queryTranslated.value = q;
+            detectedLang.value = f;
+            search(q, f, t, translator);
         },
     }) as {
         data: Ref<DeepLResult>,
@@ -40,24 +58,24 @@ const translate = async () => {
     };
 };
 
-const search = async () => {
+const search = async (q: string, f: string, t: string, translator: string) => {
+    console.log('search called with', q, f, t, translator);
     return await useFetch('/search/google', {
         server: false,
         lazy: true,
         baseURL: 'https://api.lens-s.com/dev_v1',
-        query: {
-            q: queryTranslated.value,
-        },
+        query: { q },
         onResponse({ request, response, options }) {
             const data = response._data as {
                 items: GoogleResult[],
             };
+            const resultsToBeTranslated: string[] = [];
             results.value = data.items;
             results.value.forEach((r) => {
                 resultsToBeTranslated.push(r.title);
                 resultsToBeTranslated.push(r.snippet);
-                backTranslate();
             });
+            backTranslate(f, translator, resultsToBeTranslated);
         },
     }) as {
         data: Ref<{
@@ -67,7 +85,8 @@ const search = async () => {
     };
 };
 
-const backTranslate = async () => {
+const backTranslate = async (f: string, translator: string, resultsToBeTranslated: string[]) => {
+    console.log('backTranslate called with', f, translator);
     return await useFetch(`/translate/${translator}`, {
         server: false,
         lazy: true,
@@ -78,7 +97,7 @@ const backTranslate = async () => {
         },
         body: {
             text: resultsToBeTranslated,
-            target_lang: detectedLang.value,
+            target_lang: f,
         },
         onResponse({ request, response, options }) {
             const data = response._data as DeepLResult;
@@ -96,12 +115,23 @@ const backTranslate = async () => {
     };
 };
 
-translate();
+translate(query, from, to, translator);
 
 const submit = (e: Event) => {
     e.preventDefault();
-    queryOrigin.value = query.value;
-    translate();
+    const q = document.getElementById('q');
+    const from = document.getElementById('from');
+    const to = document.getElementById('to');
+    if (!q || !to || !from) {
+        return;
+    }
+    if (!from.value) {
+        from.value = 'auto';
+    }
+    queryOrigin.value = q.value;
+    results.value = [];
+    queryTranslated.value = '';
+    translate(q.value, from.value, to.value, translator);
 };
 
 </script>
@@ -111,7 +141,7 @@ const submit = (e: Event) => {
     form(@submit="submit").Header.flex-container
         NuxtLink(to='/').flex-item.Logo
             TitleRow
-        SearchBox.flex-item(:page="Page.search", v-model="query")
+        SearchBox.flex-item(:page="Page.search", :val="query")
         .flex-item.flex-container.selects
             SelectRegion.flex-item(
                 name="from"

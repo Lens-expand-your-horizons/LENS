@@ -27,7 +27,7 @@ export default defineNuxtConfig({
             ],
         },
     },
-    modules: ['@vite-pwa/nuxt', '@nuxtjs/eslint-module'],
+    modules: ['@vite-pwa/nuxt', '@nuxtjs/eslint-module', 'nuxt-gtag'],
     runtimeConfig: {
         public: {
             gcseApiKey: '',

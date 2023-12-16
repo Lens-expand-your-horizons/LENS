@@ -25,6 +25,7 @@ const selected = computed({
 <template lang="pug">
 .selectRegion
     select.custom-select(
+        :id="name"
         :name="name"
         v-model="selected"
     )
