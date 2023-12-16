@@ -1,62 +1,64 @@
 name: Deploy to Amazon S3
 
 on:
-  push:
-    branches:
-      - "main"
+    push:
+        branches:
+            - 'main'
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        timeout-minutes: 2
 
-    permissions:
-      contents: read
+        permissions:
+            contents: read
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
 
-    - name: Build(1) npm
-      run: npm ci
+            - name: Build(1) npm
+              run: npm ci
 
-    - name: Build(2) nuxt
-      run: npm run generate
+            - name: Build(2) nuxt
+              run: npm run generate
+              env:
+                  NODE_ENV: production
+                  NUXT_PUBLIC_GTAG_ID: ${{secrets.NUXT_PUBLIC_GTAG_ID}}
 
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: dist
-        path: .output/public
-        retention-days: 5
-  
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    needs: build
+            - name: Archive production artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                  name: dist
+                  path: .output/public
+                  retention-days: 5
 
-    env:
-      AWS_REGION: ap-northeast-1
-      AWS_S3_BUCKET: lens-s.com
-    
-    permissions:
-      id-token: write
-    
-    steps:
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        role-to-assume: ${{secrets.AWS_ROLE_ARN}}
-        aws-region: ${{env.AWS_REGION}}
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        timeout-minutes: 3
+        needs: build
 
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: dist
-      
-    - name: Copy files to S3
-      run: |
-          aws s3 sync . s3://${{env.AWS_S3_BUCKET}}/
-    
+        env:
+            AWS_REGION: ap-northeast-1
+            AWS_S3_BUCKET: lens-s.com
+
+        permissions:
+            id-token: write
+
+        steps:
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              with:
+                  role-to-assume: ${{secrets.AWS_ROLE_ARN}}
+                  aws-region: ${{env.AWS_REGION}}
+
+            - name: Download artifact
+              uses: actions/download-artifact@v3
+              with:
+                  name: dist
+
+            - name: Copy files to S3
+              run: |
+                  aws s3 sync . s3://${{env.AWS_S3_BUCKET}}/
