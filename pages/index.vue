@@ -18,7 +18,10 @@ const translator = 'google';
 
 const submit = (e: Event) => {
     e.preventDefault();
-    if (!query.value || !to.value) {
+    const q = document.getElementById('q');
+    const from = document.getElementById('from');
+    const to = document.getElementById('to');
+    if (!q || !to || !from) {
         return;
     }
     if (!from.value) {
@@ -27,7 +30,7 @@ const submit = (e: Event) => {
     navigateTo({
         path: '/search',
         query: {
-            q: query.value,
+            q: q.value,
             from: from.value,
             to: to.value,
             translator,
@@ -50,13 +53,11 @@ const submit = (e: Event) => {
                 name="from"
                 placeholder="入力した言語"
                 :options="fromOptions"
-                v-model="from"
             )
             SelectRegion.flex-item(
                 name="to"
                 placeholder="検索する言語"
                 :options="toOptions"
-                v-model="to"
             )
     img.fit(src="/images/Earth.svg" alt="Earth illust")
 </template>
