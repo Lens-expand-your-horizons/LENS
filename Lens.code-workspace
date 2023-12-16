@@ -38,7 +38,7 @@
             "Wisenut"
         ],
         "cSpell.diagnosticLevel": "Hint",
-        "svg.preview.background": "transparent",
+        "svg.preview.background": "dark-transparent",
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

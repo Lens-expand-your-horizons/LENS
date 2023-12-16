@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import { Page } from '@/utils/types';
 
-const props = withDefaults(
-    defineProps<{
-        page?: Page;
-        modelValue?: string;
-    }>(),
-    {
-        page: Page.home,
-        modelValue: '',
-    },
-);
+const {
+    page = Page.home,
+    modelValue = '',
+} = defineProps<{
+    page?: Page;
+    modelValue?: string;
+}>();
 
 const emit = defineEmits<{
     (e: 'update:modelValue', v: string): void;
 }>();
 
 const q = computed({
-    get: () => props.modelValue,
+    get: () => modelValue,
     set: (q) => emit('update:modelValue', q),
 });
 

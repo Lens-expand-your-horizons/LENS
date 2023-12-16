@@ -3,10 +3,11 @@ import { Page } from '@/utils/types';
 import type { DeepLResult, GoogleResult } from '@/utils/types';
 import { fromOptions, toOptions } from '@/utils/consts';
 
-const query = useRoute().query.q as string;
-const from = useRoute().query.from as string ?? 'auto';
-const to = useRoute().query.to as string ?? 'JA';
-const translator = useRoute().query.translator as string ?? 'google';
+const query = ref(useRoute().query.q as string);
+const from = ref(useRoute().query.from as string ?? 'auto');
+const to = ref(useRoute().query.to as string ?? 'JA');
+const translator = ref(useRoute().query.translator as string ?? 'google');
+const queryOrigin = ref(query.value);
 
 const results: Ref<GoogleResult[]> = ref([]);
 const queryTranslated = ref('');
@@ -23,9 +24,9 @@ const translate = async () => {
             'Content-Type': 'application/json',
         },
         body: {
-            text: [query],
-            source_lang: from === 'auto' ? undefined : from,
-            target_lang: to,
+            text: [query.value],
+            source_lang: from.value === 'auto' ? undefined : from.value,
+            target_lang: to.value,
         },
         onResponse({ request, response, options }) {
             const data = response._data as DeepLResult;
@@ -97,30 +98,36 @@ const backTranslate = async () => {
 
 translate();
 
+const submit = (e: Event) => {
+    e.preventDefault();
+    queryOrigin.value = query.value;
+    translate();
+};
+
 </script>
 
 <template lang="pug">
 .page
-    form(action="/search", method="get").Header.flex-container
+    form(@submit="submit").Header.flex-container
         NuxtLink(to='/').flex-item.Logo
             TitleRow
-        SearchBox.flex-item(:page="Page.search", :model-value="query")
+        SearchBox.flex-item(:page="Page.search", v-model="query")
         .flex-item.flex-container.selects
             SelectRegion.flex-item(
                 name="from"
                 placeholder="入力した言語"
-                :model-value="detectedLang"
+                v-model="detectedLang"
                 :options="fromOptions"
             )
             SelectRegion.flex-item(
                 name="to"
                 placeholder="検索する言語"
-                :model-value="to"
+                v-model="to"
                 :options="toOptions"
             )
     .Contents(fallback-tag="div" fallback="Loading...")
         TranslateBox.TranslateBox(
-            :origin="query"
+            :origin="queryOrigin"
             :translate="queryTranslated"
         )
         .result(v-for="r in results" :key="r.cacheId")

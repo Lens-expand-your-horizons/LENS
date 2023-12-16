@@ -58,7 +58,7 @@ const submit = (e: Event) => {
                 :options="toOptions"
                 v-model="to"
             )
-    img.fit(src="/Earth.jpg" alt="Earth illust")
+    img.fit(src="/images/Earth.svg" alt="Earth illust")
 </template>
 
 <style scoped lang="scss">
