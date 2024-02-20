@@ -15,9 +15,9 @@ const props = defineProps({
 
 <template lang="pug">
 dl.Box
-    dt 翻訳前
+    dt Original
     dd {{ origin }}
-    dt 翻訳後
+    dt Translated
     dd {{ translate }}
 </template>
 
