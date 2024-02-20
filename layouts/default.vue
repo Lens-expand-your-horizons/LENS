@@ -47,6 +47,10 @@ $bg: #fff;
     padding: 0;
 }
 
+input {
+    -webkit-appearance: none;
+}
+
 a {
     text-decoration: none;
     color: black;
