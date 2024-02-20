@@ -145,13 +145,13 @@ const submit = (e: Event) => {
         .flex-item.flex-container.selects
             SelectRegion.flex-item(
                 name="from"
-                placeholder="入力した言語"
+                placeholder="Input language"
                 v-model="detectedLang"
                 :options="fromOptions"
             )
             SelectRegion.flex-item(
                 name="to"
-                placeholder="検索する言語"
+                placeholder="Target language"
                 v-model="to"
                 :options="toOptions"
             )
