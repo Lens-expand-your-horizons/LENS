@@ -5,7 +5,7 @@ import { fromOptions, toOptions } from '@/utils/consts';
 
 const query = useRoute().query.q as string;
 const from = useRoute().query.from as string ?? 'auto';
-const to = useRoute().query.to as string ?? 'JA';
+const to = useRoute().query.to as string ?? 'EN';
 const translator = useRoute().query.translator as string ?? 'google';
 const queryOrigin = ref(query);
 
