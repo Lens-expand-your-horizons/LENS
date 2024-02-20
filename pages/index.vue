@@ -51,12 +51,12 @@ const submit = (e: Event) => {
         .Select.flex-item.flex-container
             SelectRegion.flex-item(
                 name="from"
-                placeholder="入力した言語"
+                placeholder="Input language"
                 :options="fromOptions"
             )
             SelectRegion.flex-item(
                 name="to"
-                placeholder="検索する言語"
+                placeholder="Target language"
                 :options="toOptions"
             )
     img.fit(src="/images/Earth.svg" alt="Earth illust")
